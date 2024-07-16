@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Hungry Hive</string>
+    <string name="findFoodYouLove">Find Food You Love</string>
+    <string name="Next">Next</string>
+    <string name="fastDelivery">Fast Delivery</string>
+    <string name="slogan">Where Every Bite is a Sweet Treat!</string>
+    <string name="getStartedButton">Get Started</string>
+    <string name="loginButton">Login</string>
+    <string name="signupButton">Sign Up</string>
+    <string name="deliveryImage">Delivery Image</string>
+    <string name="welcomeText">Welcome...</string>
+    <string name="gladText">Glad To See You!</string>
+    <string name="textBoxEmail">E-mail</string>
+    <string name="textBoxPassword">Password</string>
+    <string name="textForgetPassword">Forget Password?</string>
+    <string name="buttonLogin">Login</string>
+    <string name="orLoginWith">Or Login With</string>
+    <string name="doNotHaveAccount">Don\'t Have Account?</string>
+    <string name="buttonSignupNow">Sign Up Now</string>
+    <string name="createAccount">Create Account</string>
+    <string name="toGetStarted">To Get Started</string>
+    <string name="textBoxName">Name</string>
+    <string name="textBoxPhone">Phone</string>
+    <string name="textBoxConfirmPassword">Confirm Password</string>
+    <string name="textSignUpWith">Or Signup With</string>
+    <string name="textAlreadyHaveAccount">Already Have Account</string>
+    <string name="buttonLoginNow">Login Now</string>
+    <string name="navHome">Home</string>
+    <string name="navCart">Cart</string>
+    <string name="navSearch">Search</string>
+    <string name="navMenu">Menu</string>
+    <string name="navProfile">Profile</string>
+    <string name="popularText">Popular</string>
+    <string name="viewMoreText">View Menu</string>
+    <string name="addToCartText">Add to Cart</string>
+    <string name="rs500">Rs. 500</string>
+    <string name="cart"><u>Cart</u></string>
+    <string name="proceed">Proceed</string>
+    <string name="menu">Menu</string>
+    <string name="queryHint">Search For Food</string>
+    <string name="homeScreenTagline">Explore Your Food!</string>
+    <string name="fastDeliveryParagraph">Enjoy this dish, dressed in smooth balsamic glaze, blending, sweet and savory flavors. it\'s like a delicious trip on your taste buds.</string>
+    <string name="secondScreenParagraph">Explore different foods to find the ones you enjoy the most. Discover dishes that make your taste buds happy and your body feel good.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fastDelivery">
+
+    <TextView
+        android:id="@+id/textDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/orbitron"
+        android:letterSpacing=".1"
+        android:text="@string/fastDelivery"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_30sdp"
+        app:layout_constraintEnd_toEndOf="@+id/imageDelivery"
+        app:layout_constraintStart_toStartOf="@+id/imageDelivery"
+        app:layout_constraintTop_toBottomOf="@+id/imageDelivery" />
+
+    <TextView
+        android:id="@+id/textDeliveryPara"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/zenantique"
+        android:textSize="@dimen/_18ssp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/fastDeliveryParagraph"
+        app:layout_constraintEnd_toEndOf="@+id/textDelivery"
+        app:layout_constraintStart_toStartOf="@+id/textDelivery"
+        app:layout_constraintTop_toBottomOf="@+id/textDelivery" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonNextWelcome"
+        android:background="@drawable/nextbutton"
+        android:layout_width="@dimen/_105sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/zenantique"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20ssp"
+        android:letterSpacing=".1"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:layout_marginBottom="@dimen/_70sdp"
+        android:text="@string/Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageDelivery"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_180sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/food_delivery" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".findFood">
+
+    <ImageView
+        android:id="@+id/imageFood"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/foos" />
+
+    <TextView
+        android:id="@+id/textHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/findFoodYouLove"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_30ssp"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/orbitron"
+        android:textStyle="bold"
+        android:letterSpacing=".1"
+        app:layout_constraintEnd_toEndOf="@+id/imageFood"
+        app:layout_constraintStart_toStartOf="@+id/imageFood"
+        app:layout_constraintTop_toBottomOf="@+id/imageFood" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/secondScreenParagraph"
+        android:fontFamily="@font/zenantique"
+        android:textColor="@color/textColor"
+        android:textAlignment="center"
+        android:textSize="@dimen/_17ssp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="@+id/textHead"
+        app:layout_constraintStart_toStartOf="@+id/textHead"
+        app:layout_constraintTop_toBottomOf="@+id/textHead" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonNext"
+        android:background="@drawable/nextbutton"
+        android:layout_width="@dimen/_105sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/zenantique"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20ssp"
+        android:letterSpacing=".1"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:layout_marginBottom="@dimen/_70sdp"
+        android:text="@string/Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

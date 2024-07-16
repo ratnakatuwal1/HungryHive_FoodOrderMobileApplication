@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".registerScreen">
+
+    <TextView
+        android:id="@+id/textCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_35sdp"
+        android:fontFamily="@font/orbitron"
+        android:letterSpacing=".1"
+        android:text="@string/createAccount"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_28ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textGetStarted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zenantique"
+        android:text="@string/toGetStarted"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textCreateAccount"
+        app:layout_constraintStart_toStartOf="@+id/textCreateAccount"
+        app:layout_constraintTop_toBottomOf="@+id/textCreateAccount" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_47sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/person"
+        android:drawablePadding="@dimen/_10sdp"
+        android:ems="10"
+        android:fontFamily="@font/zenantique"
+        android:hint="@string/textBoxName"
+        android:inputType="text"
+        android:paddingStart="@dimen/_5sdp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/textGetStarted"
+        app:layout_constraintStart_toStartOf="@+id/textGetStarted"
+        app:layout_constraintTop_toBottomOf="@+id/textGetStarted" />
+
+    <EditText
+        android:id="@+id/editTextEmailAddress"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_47sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/mail"
+        android:drawablePadding="@dimen/_10sdp"
+        android:ems="10"
+        android:fontFamily="@font/zenantique"
+        android:hint="@string/textBoxEmail"
+        android:inputType="textEmailAddress"
+        android:paddingStart="@dimen/_5sdp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/editTextName"
+        app:layout_constraintStart_toStartOf="@+id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_47sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/phone"
+        android:drawablePadding="@dimen/_10sdp"
+        android:ems="10"
+        android:fontFamily="@font/zenantique"
+        android:hint="@string/textBoxPhone"
+        android:inputType="phone"
+        android:paddingStart="@dimen/_5sdp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/editTextEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_47sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/lock"
+        android:drawablePadding="@dimen/_10sdp"
+        android:ems="10"
+        android:fontFamily="@font/zenantique"
+        android:hint="@string/textBoxPassword"
+        android:inputType="textPassword"
+        android:paddingStart="@dimen/_5sdp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
+        app:layout_constraintStart_toStartOf="@+id/editTextPhone"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+
+    <EditText
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_47sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/lock"
+        android:drawablePadding="@dimen/_10sdp"
+        android:ems="10"
+        android:fontFamily="@font/zenantique"
+        android:hint="@string/textBoxConfirmPassword"
+        android:inputType="textPassword"
+        android:paddingStart="@dimen/_5sdp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSignup"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_47sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:background="@drawable/nextbutton"
+        android:elevation="@dimen/_5sdp"
+        android:fontFamily="@font/zenantique"
+        android:letterSpacing=".1"
+        android:text="@string/signupButton"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_22ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/editTextConfirmPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword" />
+
+    <TextView
+        android:id="@+id/textSignupWith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/zenantique"
+        android:text="@string/textSignUpWith"
+        android:textSize="@dimen/_18ssp"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSignup"
+        app:layout_constraintStart_toStartOf="@+id/buttonSignup"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignup" />
+
+    <ImageView
+        android:id="@+id/imageGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintEnd_toStartOf="@+id/imageFacebook"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSignupWith"
+        app:srcCompat="@drawable/google" />
+
+    <ImageView
+        android:id="@+id/imageFacebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageGoogle"
+        app:layout_constraintTop_toBottomOf="@+id/textSignupWith"
+        app:srcCompat="@drawable/facebook" />
+
+    <TextView
+        android:id="@+id/textAlreadyHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textAlreadyHaveAccount"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold"
+        android:fontFamily="@font/zenantique"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageFacebook" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonLoginNow"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_47sdp"
+        android:text="@string/buttonLoginNow"
+        android:background="@drawable/nextbutton"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="@font/zenantique"
+        android:textSize="@dimen/_20ssp"
+        android:letterSpacing=".1"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="@+id/textAlreadyHaveAccount"
+        app:layout_constraintStart_toStartOf="@+id/textAlreadyHaveAccount"
+        app:layout_constraintTop_toBottomOf="@+id/textAlreadyHaveAccount" />
+</androidx.constraintlayout.widget.ConstraintLayout>

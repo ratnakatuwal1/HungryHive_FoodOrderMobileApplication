@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".loginHome">
+
+    <ImageView
+        android:id="@+id/imageLogo"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_240sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_2" />
+
+    <TextView
+        android:id="@+id/textAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:fontFamily="@font/orbitron"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:textSize="@dimen/_30ssp"
+        android:letterSpacing=".1"
+        app:layout_constraintEnd_toEndOf="@+id/imageLogo"
+        app:layout_constraintStart_toStartOf="@+id/imageLogo"
+        app:layout_constraintTop_toBottomOf="@+id/imageLogo" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonLogin"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:background="@drawable/nextbutton"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_23ssp"
+        android:letterSpacing=".1"
+        android:textStyle="bold"
+        android:elevation="@dimen/_5sdp"
+        android:fontFamily="@font/zenantique"
+        android:text="@string/loginButton"
+        app:layout_constraintEnd_toEndOf="@+id/textAppName"
+        app:layout_constraintStart_toStartOf="@+id/textAppName"
+        app:layout_constraintTop_toBottomOf="@+id/textAppName" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSignup"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:background="@drawable/nextbutton"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_23ssp"
+        android:elevation="@dimen/_5sdp"
+        android:letterSpacing=".1"
+        android:textStyle="bold"
+        android:fontFamily="@font/zenantique"
+        android:text="@string/signupButton"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
+        app:layout_constraintStart_toStartOf="@+id/buttonLogin"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
