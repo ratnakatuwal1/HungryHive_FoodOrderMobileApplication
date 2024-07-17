@@ -41,6 +41,7 @@
     <string name="homeScreenTagline">Explore Your Food!</string>
     <string name="fastDeliveryParagraph">Enjoy this dish, dressed in smooth balsamic glaze, blending, sweet and savory flavors. it\'s like a delicious trip on your taste buds.</string>
     <string name="secondScreenParagraph">Explore different foods to find the ones you enjoy the most. Discover dishes that make your taste buds happy and your body feel good.</string>
+    <string name="congratsTitle">Your order have been placed</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

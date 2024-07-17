@@ -79,10 +79,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:fontFamily="@font/zenantique"
         android:letterSpacing=".1"
         android:text="Recent View"
-        android:layout_marginTop="@dimen/_8sdp"
         android:textColor="@color/textColor"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
@@ -103,21 +103,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Profile"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/changePasswordButton"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogout"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileRecycleView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/buttonEditProfile"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonEditProfile"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/buttonEditProfile"
-        app:layout_constraintTop_toBottomOf="@+id/buttonEditProfile" />
+        app:layout_constraintStart_toEndOf="@+id/buttonEditProfile"
+        app:layout_constraintTop_toTopOf="@+id/buttonEditProfile" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/changePasswordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
