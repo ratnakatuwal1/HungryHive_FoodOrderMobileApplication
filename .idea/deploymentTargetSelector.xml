@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-06-19T16:33:11.479649900Z">
+        <DropdownSelection timestamp="2024-07-17T16:55:56.996561200Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RZ8MB21Z92J" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\tandu\.android\avd\myPhone_API_30.avd" />
             </handle>
           </Target>
         </DropdownSelection>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfile">
+
+    <TextView
+        android:id="@+id/textViewEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_26ssp"
+        android:textStyle="bold"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/zenantique"
+        android:letterSpacing=".15"
+        android:text="Edit Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImageChange"
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_140sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sampleimage"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEditProfile"
+        app:layout_constraintStart_toStartOf="@+id/textViewEditProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEditProfile" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonChangeProfileImage"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/proceed"
+        android:textColor="@color/white"
+        android:fontFamily="@font/zenantique"
+        android:textAllCaps="false"
+        android:letterSpacing=".1"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        android:text="@string/change_picture"
+        app:layout_constraintEnd_toEndOf="@+id/profileImageChange"
+        app:layout_constraintStart_toStartOf="@+id/profileImageChange"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageChange" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:ems="10"
+        android:background="@drawable/edittext"
+        android:inputType="text"
+        android:textColor="@color/textColor"
+        android:text="Full Name"
+        android:fontFamily="@font/zenantique"
+        android:textColorHint="@color/black"
+        android:paddingStart="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonChangeProfileImage"
+        app:layout_constraintStart_toStartOf="@+id/buttonChangeProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/buttonChangeProfileImage" />
+
+    <EditText
+        android:id="@+id/editTextEmailAddress"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:ems="10"
+        android:background="@drawable/edittext"
+        android:hint="E-mail"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        android:paddingStart="@dimen/_10sdp"
+        android:fontFamily="@font/zenantique"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/editTextName"
+        app:layout_constraintStart_toStartOf="@+id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:ems="10"
+        android:background="@drawable/edittext"
+        android:hint="Phone"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        android:paddingStart="@dimen/_10sdp"
+        android:fontFamily="@font/zenantique"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/editTextEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
+
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/edittext"
+        android:ems="10"
+        android:hint="Address"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        android:paddingStart="@dimen/_10sdp"
+        android:fontFamily="@font/zenantique"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
+        app:layout_constraintStart_toStartOf="@+id/editTextPhone"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSaveChanges"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:fontFamily="@font/zenantique"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        android:letterSpacing=".1"
+        android:textAllCaps="false"
+        android:text="Save Changes"
+        android:background="@drawable/proceed"
+        app:layout_constraintEnd_toEndOf="@+id/editTextAddress"
+        app:layout_constraintStart_toStartOf="@+id/editTextAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
