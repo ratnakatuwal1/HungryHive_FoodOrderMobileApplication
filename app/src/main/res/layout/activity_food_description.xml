@@ -94,6 +94,7 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_15sdp"
         android:textSize="@dimen/_14ssp"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/zenantique"
         android:text="TextView \nTextView \nTextView"
         app:layout_constraintStart_toStartOf="parent"

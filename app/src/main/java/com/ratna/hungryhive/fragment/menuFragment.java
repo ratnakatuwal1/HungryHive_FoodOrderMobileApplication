@@ -36,8 +36,7 @@ public class menuFragment extends Fragment {
         List<String> foodPrices = Arrays.asList("100", "200", "300", "400", "100", "200", "300", "400");
         List<Integer> foodImages = Arrays.asList(R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta, R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta);
 
-
-        MenuAdapter adapter = new MenuAdapter(foodNames, foodPrices, foodImages);
+        MenuAdapter adapter = new MenuAdapter(requireContext(), foodNames, foodPrices, foodImages);
         binding.menuRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.menuRecyclerView.setAdapter(adapter);
         return binding.getRoot();

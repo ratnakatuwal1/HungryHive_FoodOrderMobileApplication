@@ -17,8 +17,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     private List<String> items;
     private List<String> prices;
     private List<Integer> images;
+    private Context context;
 
-    public MenuAdapter(List<String> items, List<String> prices, List<Integer> images) {
+    public MenuAdapter(Context context, List<String> items, List<String> prices, List<Integer> images) {
+        this.context = context;
         this.items = items;
         this.prices = prices;
         this.images = images;
@@ -37,6 +39,14 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         String price = prices.get(position);
         int image = images.get(position);
         holder.bind(item, price, image);
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, FoodDescriptionActivity.class);
+            intent.putExtra("item_name", item);
+            intent.putExtra("item_price", price);
+            intent.putExtra("item_image", image);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -50,14 +60,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         public MenuViewHolder(@NonNull MenuItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-
-            binding.getRoot().setOnClickListener(view -> {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, FoodDescriptionActivity.class);
-                intent.putExtra("menuItemName", binding.menuFoodName.getText().toString());
-                intent.putExtra("menuImage", (Intent) view.getTag());
-                context.startActivity(intent);
-            });
         }
 
         public void bind(String item, String price, int image) {

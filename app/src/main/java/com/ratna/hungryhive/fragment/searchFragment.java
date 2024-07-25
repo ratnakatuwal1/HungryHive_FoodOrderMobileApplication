@@ -38,7 +38,7 @@ public class searchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
-        adapter = new MenuAdapter(filteredFoodName, filteredFoodPrice, filteredFoodImage);
+        adapter = new MenuAdapter(requireContext(), filteredFoodName, filteredFoodPrice, filteredFoodImage);
         binding.menuRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.menuRecyclerView.setAdapter(adapter);
 
