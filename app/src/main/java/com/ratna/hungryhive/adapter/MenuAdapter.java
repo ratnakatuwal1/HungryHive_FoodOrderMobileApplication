@@ -43,7 +43,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, FoodDescriptionActivity.class);
             intent.putExtra("item_name", item);
-            intent.putExtra("item_price", price);
+            //intent.putExtra("item_price", price);
             intent.putExtra("item_image", image);
             context.startActivity(intent);
         });

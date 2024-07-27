@@ -22,12 +22,12 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         binding = ActivityFoodDescriptionBinding.inflate(getLayoutInflater());
 
         String itemName = getIntent().getStringExtra("item_name");
-        String itemPrice = getIntent().getStringExtra("item_price");
+      //  String itemPrice = getIntent().getStringExtra("item_price");
         int itemImage = getIntent().getIntExtra("item_image", -1);
 
         binding.textViewFoodName.setText(itemName);
         binding.imageFood.setImageResource(itemImage);
-        binding.textViewDescriptionPara.setText(String.format("Price: %s", itemPrice));
+        //binding.textViewDescriptionPara.setText(String.format("Price: %s", itemPrice));
 
     }
 }

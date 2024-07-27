@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckoutActivity">
+
+    <TextView
+        android:id="@+id/textViewCheckout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Checkout"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/orbitron"
+        android:textStyle="bold"
+        android:letterSpacing=".1"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDeliveryDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery Details"
+        android:fontFamily="@font/zenantique"
+        android:textStyle="bold"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_14ssp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCheckout" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/edittext"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/zenantique"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        android:ems="10"
+        android:paddingStart="@dimen/_10sdp"
+        android:inputType="text"
+        android:hint="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDeliveryDetails" />
+
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:ems="10"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/edittext"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        android:fontFamily="@font/zenantique"
+        android:paddingStart="@dimen/_10sdp"
+        android:inputType="text"
+        android:hint="Address"
+        app:layout_constraintEnd_toEndOf="@+id/editTextName"
+        app:layout_constraintStart_toStartOf="@+id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:ems="10"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Phone"
+        android:fontFamily="@font/zenantique"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        android:paddingStart="@dimen/_10sdp"
+        android:background="@drawable/edittext"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/editTextAddress"
+        app:layout_constraintStart_toStartOf="@+id/editTextAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
+
+    <EditText
+        android:id="@+id/editTextEmailAddress"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/zenantique"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/black"
+        android:paddingStart="@dimen/_10sdp"
+        android:background="@drawable/edittext"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="E-mail"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
+        app:layout_constraintStart_toStartOf="@+id/editTextPhone"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+
+    <TextView
+        android:id="@+id/textViewPaymentOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="Payment Options"
+        android:fontFamily="@font/zenantique"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupPaymentMethod"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPaymentOptions">
+
+        <RadioButton
+            android:id="@+id/payViaKhalti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/zenantique"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:text="Pay Via Khalti"
+            android:button="@drawable/custom_radio_button"/>
+
+        <RadioButton
+            android:id="@+id/payViaPaytm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:fontFamily="@font/zenantique"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_10ssp"
+            android:text="Cash in Delivery"
+            android:button="@drawable/custom_radio_button"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="61dp"
+        tools:layout_editor_absoluteY="563dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="673dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
