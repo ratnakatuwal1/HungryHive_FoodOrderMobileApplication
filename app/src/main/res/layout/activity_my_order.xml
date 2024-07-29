@@ -7,13 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".MyOrderActivity">
 
-
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textMyOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Order"
-        android:fontFamily="@font/zenantique"
+        android:fontFamily="@font/orbitron"
         android:textSize="@dimen/_24ssp"
         android:layout_marginTop="@dimen/_20sdp"
         android:textColor="@color/textColor"
@@ -28,11 +27,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintTop_toBottomOf="@id/textView14"
+        app:layout_constraintTop_toBottomOf="@id/textMyOrder"
         app:layout_constraintBottom_toTopOf="@id/linearLayoutAmounts"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayoutAmounts"
@@ -52,6 +50,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/zenantique"
+            android:textSize="@dimen/_14ssp"
             android:text="Total Food Amount:"
             android:textStyle="bold"/>
 
@@ -60,6 +61,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/zenantique"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_14ssp"
             android:text="Rs. 300"
             android:gravity="end"/>
     </LinearLayout>
@@ -73,6 +78,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/zenantique"
+            android:textColor="@color/textColor"
             android:text="Delivery Charges:"
             android:textStyle="bold"/>
 
@@ -81,6 +89,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/zenantique"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_14ssp"
             android:text="Rs. 100"
             android:gravity="end"/>
     </LinearLayout>
@@ -94,6 +106,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/zenantique"
+            android:textColor="@color/textColor"
             android:text="Grand Total:"
             android:textStyle="bold"/>
 
@@ -102,15 +117,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/zenantique"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_14ssp"
             android:text="Rs. 400"
             android:gravity="end"/>
     </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/checkoutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/proceed"
+            android:fontFamily="@font/zenantique"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            android:letterSpacing=".1"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
             android:layout_marginTop="16dp"
             android:text="Checkout"/>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
