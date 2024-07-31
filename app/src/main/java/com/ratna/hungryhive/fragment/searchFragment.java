@@ -50,10 +50,12 @@ public class searchFragment extends Fragment {
 
     private void showAllMenu() {
         filteredFoodName.clear();
+        filteredDescription.clear();
         filteredFoodPrice.clear();
         filteredFoodImage.clear();
 
         filteredFoodName.addAll(menuFoodName);
+        filteredDescription.addAll(foodDescription);
         filteredFoodPrice.addAll(menuFoodPrice);
         filteredFoodImage.addAll(menuFoodImage);
 
@@ -79,6 +81,7 @@ public class searchFragment extends Fragment {
 
     private void filterMenuItems(String s) {
         filteredFoodName.clear();
+        filteredDescription.clear();
         filteredFoodPrice.clear();
         filteredFoodImage.clear();
 
@@ -86,6 +89,7 @@ public class searchFragment extends Fragment {
             String foodName = menuFoodName.get(i);
             if (foodName.toLowerCase().contains(s.toLowerCase())) {
                 filteredFoodName.add(menuFoodName.get(i));
+                filteredDescription.add(foodDescription.get(i));
                 filteredFoodPrice.add(menuFoodPrice.get(i));
                 filteredFoodImage.add(menuFoodImage.get(i));
             }

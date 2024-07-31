@@ -1,5 +1,6 @@
 package com.ratna.hungryhive.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,10 +48,11 @@ public class homeFragment extends Fragment {
         imageSlider.setImageList(imageList, ScaleTypes.FIT);
 
         List<String> foodNames = Arrays.asList("pizza", "burger", "pasta", "pasta");
+        List<String> foodDescription = Arrays.asList("Delicious beef burger", "Cheesy pizza", "Creamy pasta", "Delicious beef burger");
         List<Integer> foodImages = Arrays.asList(R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta);
         List<String> foodPrices = Arrays.asList("Rs. 100", "Rs. 200", "Rs. 300", "400");
 
-        PopularAdapter adapter = new PopularAdapter(foodNames, foodImages, foodPrices);
+        PopularAdapter adapter = new PopularAdapter(requireContext(), foodNames, foodDescription, foodImages, foodPrices);
         binding.PopularRecycleView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.PopularRecycleView.setAdapter(adapter);
         return binding.getRoot();
