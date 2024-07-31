@@ -1,17 +1,13 @@
 package com.ratna.hungryhive;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.ratna.hungryhive.databinding.ActivityFoodDescriptionBinding;
 
 public class FoodDescriptionActivity extends AppCompatActivity {
-    private ActivityFoodDescriptionBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +15,16 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_food_description);
 
-        binding = ActivityFoodDescriptionBinding.inflate(getLayoutInflater());
+        String foodName = getIntent().getStringExtra("food_name");
+        String foodDescription = getIntent().getStringExtra("food_description");
+        int foodImage = getIntent().getIntExtra("food_image", 0);
 
-        String itemName = getIntent().getStringExtra("item_name");
-      //  String itemPrice = getIntent().getStringExtra("item_price");
-        int itemImage = getIntent().getIntExtra("item_image", -1);
+        TextView textViewFoodName = findViewById(R.id.textViewFoodName);
+        TextView textViewDescriptionPara = findViewById(R.id.textViewDescriptionPara);
+        ImageView imageFood = findViewById(R.id.imageFood);
 
-        binding.textViewFoodName.setText(itemName);
-        binding.imageFood.setImageResource(itemImage);
-        //binding.textViewDescriptionPara.setText(String.format("Price: %s", itemPrice));
-
+        textViewFoodName.setText(foodName);
+        textViewDescriptionPara.setText(foodDescription);
+        imageFood.setImageResource(foodImage);
     }
 }

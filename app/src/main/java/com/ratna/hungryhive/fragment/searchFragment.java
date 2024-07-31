@@ -22,10 +22,12 @@ public class searchFragment extends Fragment {
     private FragmentSearchBinding binding;
     private MenuAdapter adapter;
     private List<String> menuFoodName = Arrays.asList("Pizza", "Burger", "Pasta", "Pasta", "Pizza", "Burger", "Pasta", "Pasta");
+    private List<String> foodDescription = Arrays.asList("Delicious beef burger", "Cheesy pizza", "Creamy pasta", "Delicious beef burger", "Cheesy pizza", "Creamy pasta", "Delicious beef burger", "Cheesy pizza");
     private List<String> menuFoodPrice = Arrays.asList("100", "200", "300", "400", "100", "200", "300", "400");
     private List<Integer> menuFoodImage = Arrays.asList(R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta, R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta);
 
     private List<String> filteredFoodName = new ArrayList<>();
+    private List<String> filteredDescription = new ArrayList<>();
     private List<String> filteredFoodPrice = new ArrayList<>();
     private List<Integer> filteredFoodImage = new ArrayList<>();
 
@@ -33,12 +35,11 @@ public class searchFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
-        adapter = new MenuAdapter(requireContext(), filteredFoodName, filteredFoodPrice, filteredFoodImage);
+        adapter = new MenuAdapter(requireContext(), filteredFoodName, filteredDescription, filteredFoodPrice, filteredFoodImage);
         binding.menuRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.menuRecyclerView.setAdapter(adapter);
 
