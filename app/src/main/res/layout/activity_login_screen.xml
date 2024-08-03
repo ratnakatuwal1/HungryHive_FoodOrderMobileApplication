@@ -11,12 +11,12 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".1"
         android:text="@string/welcomeText"
         android:textColor="@color/textColor"
-        android:textSize="@dimen/_35ssp"
+        android:textSize="@dimen/_30ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,16 +31,16 @@
         android:text="@string/gladText"
         android:textColor="@color/textColor"
         android:textSize="@dimen/_20ssp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/welcomeText"
         app:layout_constraintStart_toStartOf="@+id/welcomeText"
         app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
 
     <EditText
         android:id="@+id/editTextEmailAddress"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="@dimen/_47sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:autofillHints="emailAddress"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/mail"
         android:drawablePadding="@dimen/_10sdp"
@@ -57,9 +57,10 @@
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:autofillHints="password"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/lock"
         android:drawablePadding="@dimen/_10sdp"
@@ -90,16 +91,18 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLogin"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_width="@dimen/_210sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/nextbutton"
         android:elevation="@dimen/_5sdp"
         android:fontFamily="@font/zenantique"
         android:letterSpacing=".1"
         android:text="@string/buttonLogin"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="@dimen/_23ssp"
+        android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,21 +116,50 @@
         android:fontFamily="@font/zenantique"
         android:text="@string/orLoginWith"
         android:textColor="@color/textColor"
-        android:textSize="@dimen/_18ssp"
+        android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
         app:layout_constraintStart_toStartOf="@+id/buttonLogin"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/imageButtonFacebook"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:contentDescription="@string/facebook"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textOrLoginWith"
+        app:srcCompat="@drawable/facebook" />
+
+    <ImageView
+        android:id="@+id/imageButtonGoogle"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:contentDescription="@string/google"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textOrLoginWith"
+        app:srcCompat="@drawable/google" />
+
     <TextView
         android:id="@+id/textDoNotHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/zenantique"
         android:text="@string/doNotHaveAccount"
         android:textColor="@color/textColor"
-        android:textSize="@dimen/_18ssp"
+        android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,40 +167,21 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSignupNow"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_width="@dimen/_210sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/nextbutton"
+        android:elevation="@dimen/_5sdp"
         android:fontFamily="@font/zenantique"
         android:letterSpacing=".1"
         android:text="@string/buttonSignupNow"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textDoNotHaveAccount"
         app:layout_constraintStart_toStartOf="@+id/textDoNotHaveAccount"
         app:layout_constraintTop_toBottomOf="@+id/textDoNotHaveAccount" />
-
-    <ImageView
-        android:id="@+id/imageButtonFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        app:layout_constraintEnd_toStartOf="@+id/imageButtonGoogle"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textOrLoginWith"
-        app:srcCompat="@drawable/facebook" />
-
-    <ImageView
-        android:id="@+id/imageButtonGoogle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButtonFacebook"
-        app:layout_constraintTop_toBottomOf="@+id/textOrLoginWith"
-        app:srcCompat="@drawable/google" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
