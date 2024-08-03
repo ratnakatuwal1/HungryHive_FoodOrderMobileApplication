@@ -62,6 +62,7 @@
         android:fontFamily="@font/zenantique"
         android:letterSpacing=".1"
         android:text="@string/Next"
+        android:outlineSpotShadowColor="@color/pastel_blue"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
