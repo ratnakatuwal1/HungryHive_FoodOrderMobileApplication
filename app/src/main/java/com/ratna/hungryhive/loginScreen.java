@@ -1,5 +1,6 @@
 package com.ratna.hungryhive;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -12,6 +13,7 @@ public class loginScreen extends AppCompatActivity {
     EditText editTextPassword;
     boolean isPasswordVisible = false;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
