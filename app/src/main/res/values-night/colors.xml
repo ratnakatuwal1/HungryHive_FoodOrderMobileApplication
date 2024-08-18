@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#000000</color>
-    <color name="textColor">#FFFFFF</color>
+    <!-- Neutral Background Colors -->
+    <color name="background_color">#2B2B2B</color>
+    <color name="primary_text_color">#E0E0E0</color>
+    <color name="accent_text_color">#C62828</color>
+
+    <!-- Button and Card Backgrounds -->
+    <color name="button_card_background">#424242</color>
+    <color name="button_text_color">#FFFFFF</color>
+
+    <!-- Shadow and Glow Colors -->
+    <color name="shadow_color">#1AFFFFFF</color> <!-- rgba(255, 255, 255, 0.1) -->
+    <color name="border_color">#4D4D4D</color>
+
+    <!-- Icon Colors -->
+    <color name="icon_color">#E0E0E0</color>
+
+    <!-- Brand Colors -->
+    <color name="brand_red">#C62828</color>
+    <color name="brand_green">#4CAF50</color>
+    <color name="button_accent_color">#FF5722</color> <!-- Orange button -->
 </resources>

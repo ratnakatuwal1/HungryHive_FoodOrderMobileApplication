@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="red">#C2020D</color>
-    <color name="background">#FFFFFF</color>
-    <color name="textColor">#000000</color>
-    <color name="pastel_blue">#A7C7E7</color>
-    <color name="transparent">#00000000</color>
+    <!-- Neutral Background Colors -->
+    <color name="background_color">#F5F5F5</color>
+    <color name="primary_text_color">#333333</color>
+    <color name="accent_text_color">#C62828</color>
+
+    <!-- Button and Card Backgrounds -->
+    <color name="button_card_background">#FFFFFF</color>
+    <color name="button_text_color">#FFFFFF</color>
+
+    <!-- Shadow and Border Colors -->
+    <color name="shadow_color">#33000000</color> <!-- rgba(0, 0, 0, 0.2) -->
+    <color name="border_color">#E0E0E0</color>
+
+    <!-- Icon Colors -->
+    <color name="icon_color">#666666</color>
+
+    <!-- Brand Colors -->
+    <color name="brand_red">#C62828</color>
+    <color name="brand_green">#4CAF50</color>
+    <color name="button_accent_color">#FF5722</color> <!-- Orange button -->
 </resources>
