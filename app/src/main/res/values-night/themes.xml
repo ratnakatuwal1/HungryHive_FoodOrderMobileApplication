@@ -2,18 +2,18 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.HungryHive" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <item name="colorBackground">@color/background_color</item>
-        <item name="colorPrimaryText">@color/primary_text_color</item>
-        <item name="colorAccentText">@color/accent_text_color</item>
-        <item name="colorButtonBackground">@color/button_card_background</item>
-        <item name="colorButtonText">@color/button_text_color</item>
-        <item name="android:shadowColor">@color/shadow_color</item>
-        <item name="colorBorder">@color/border_color</item>
-        <item name="colorIcon">@color/icon_color</item>
+        <attr name="colorBackground">@color/background_color</attr>
+        <attr name="colorPrimaryText">@color/primary_text_color</attr>
+        <attr name="colorAccentText">@color/accent_text_color</attr>
+        <attr name="colorButtonBackground">@color/button_card_background</attr>
+        <attr name="colorButtonText">@color/button_text_color</attr>
+        <attr name="android:shadowColor">@color/shadow_color</attr>
+        <attr name="colorBorder">@color/border_color</attr>
+        <attr name="colorIcon">@color/icon_color</attr>
         <!-- Brand Colors -->
-        <item name="colorBrandRed">@color/brand_red</item>
-        <item name="colorBrandGreen">@color/brand_green</item>
-        <item name="colorButtonAccent">@color/button_accent_color</item>
+        <attr name="colorBrandRed">@color/brand_red</attr>
+        <attr name="colorBrandGreen">@color/brand_green</attr>
+        <attr name="colorButtonAccent">@color/button_accent_color</attr>
     </style>
 
     <style name="Theme.HungryHive" parent="Base.Theme.HungryHive"/>
