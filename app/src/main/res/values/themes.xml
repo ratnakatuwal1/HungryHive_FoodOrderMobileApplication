@@ -2,18 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.HungryHive" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <attr name="colorBackground">@color/background_color</attr>
-        <attr name="colorPrimaryText">@color/primary_text_color</attr>
-        <attr name="colorAccentText">@color/accent_text_color</attr>
-        <attr name="colorButtonBackground">@color/button_card_background</attr>
-        <attr name="colorButtonText">@color/button_text_color</attr>
-        <attr name="android:shadowColor">@color/shadow_color</attr>
-        <attr name="colorBorder">@color/border_color</attr>
-        <attr name="colorIcon">@color/icon_color</attr>
-        <!-- Brand Colors -->
-        <attr name="colorBrandRed">@color/brand_red</attr>
-        <attr name="colorBrandGreen">@color/brand_green</attr>
-        <attr name="colorButtonAccent">@color/button_accent_color</attr>
+
     </style>
 
     <style name="Theme.HungryHive" parent="Base.Theme.HungryHive"/>
