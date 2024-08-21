@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".findFood">
 
     <ImageView
@@ -28,7 +29,7 @@
         android:letterSpacing=".1"
         android:text="@string/findFoodYouLove"
         android:textAlignment="center"
-        android:textColor="@color/textColor"
+        android:textColor="@color/primary_text_color"
         android:textSize="@dimen/_33ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageFood"
@@ -45,7 +46,7 @@
         android:paddingEnd="@dimen/_5sdp"
         android:text="@string/secondScreenParagraph"
         android:textAlignment="center"
-        android:textColor="@color/textColor"
+        android:textColor="@color/primary_text_color"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintEnd_toEndOf="@+id/textHead"
         app:layout_constraintStart_toStartOf="@+id/textHead"
