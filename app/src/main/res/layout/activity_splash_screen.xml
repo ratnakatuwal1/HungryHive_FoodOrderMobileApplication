@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".splashScreen"
-    android:background="@color/background_color">
+    android:background="@color/BackgroundColor">
 
     <ImageView
         android:id="@+id/imageLogo"
@@ -27,7 +27,7 @@
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".1"
         android:text="@string/app_name"
-        android:textColor="@color/accent_text_color"
+        android:textColor="@color/HeadingTextColor"
         android:textSize="@dimen/_35ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageLogo"

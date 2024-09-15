@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".homeScreen">
 
     <TextView
@@ -15,7 +16,7 @@
         android:layout_marginTop="@dimen/_18sdp"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
-        android:textColor="@color/textColor"
+        android:textColor="@color/HeadingTextColor"
         android:fontFamily="@font/orbitron"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

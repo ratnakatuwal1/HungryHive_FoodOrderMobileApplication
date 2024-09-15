@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".CheckoutActivity">
 
     <TextView
@@ -15,7 +16,7 @@
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".1"
         android:text="Checkout"
-        android:textColor="#000000"
+        android:textColor="@color/HeadingTextColor"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:fontFamily="@font/zenantique"
         android:text="Delivery Details"
-        android:textColor="#000000"
+        android:textColor="@color/SubHeadingTextColor"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +48,8 @@
         android:hint="Name"
         android:inputType="text"
         android:paddingStart="@dimen/_10sdp"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDeliveryDetails" />
@@ -64,8 +65,8 @@
         android:hint="Address"
         android:inputType="text"
         android:paddingStart="@dimen/_10sdp"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextName"
         app:layout_constraintStart_toStartOf="@+id/editTextName"
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
@@ -81,8 +82,8 @@
         android:hint="Phone"
         android:inputType="phone"
         android:paddingStart="@dimen/_10sdp"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextAddress"
         app:layout_constraintStart_toStartOf="@+id/editTextAddress"
         app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
@@ -98,8 +99,8 @@
         android:hint="E-mail"
         android:inputType="textEmailAddress"
         android:paddingStart="@dimen/_10sdp"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
         app:layout_constraintStart_toStartOf="@+id/editTextPhone"
         app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
@@ -112,7 +113,7 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:fontFamily="@font/zenantique"
         android:text="Payment Options"
-        android:textColor="#000000"
+        android:textColor="@color/SubHeadingTextColor"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +135,7 @@
             android:button="@drawable/custom_radio_button"
             android:fontFamily="@font/zenantique"
             android:text="Pay Via Khalti"
-            android:textColor="#000000"
+            android:textColor="@color/ParagraphTextColor"
             android:textSize="@dimen/_10ssp" />
 
         <RadioButton
@@ -145,7 +146,7 @@
             android:button="@drawable/custom_radio_button"
             android:fontFamily="@font/zenantique"
             android:text="Cash in Delivery"
-            android:textColor="#000000"
+            android:textColor="@color/ParagraphTextColor"
             android:textSize="@dimen/_10ssp" />
     </RadioGroup>
 
@@ -157,7 +158,7 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:fontFamily="@font/zenantique"
         android:text="Grand Total: "
-        android:textColor="#000000"
+        android:textColor="@color/SubHeadingTextColor"
         android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +172,7 @@
         android:layout_marginEnd="@dimen/_15sdp"
         android:fontFamily="@font/zenantique"
         android:text="Rs. 500"
-        android:textColor="#000000"
+        android:textColor="@color/ParagraphTextColor"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -182,14 +183,14 @@
         android:layout_width="@dimen/_180sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_35sdp"
+        android:background="@drawable/nextbutton"
         android:fontFamily="@font/zenantique"
-        android:textColor="#000000"
-        android:textAllCaps="false"
-        android:background="@drawable/proceed"
         android:letterSpacing=".1"
+        android:text="Confirm Order"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
-        android:text="Confirm Order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textGrandTotal" />
@@ -198,18 +199,16 @@
         android:id="@+id/buttonCancel"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/nextbutton"
         android:fontFamily="@font/zenantique"
-        android:textColor="#000000"
-        android:textAllCaps="false"
-        android:background="@drawable/proceed"
         android:letterSpacing=".1"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
-        android:text="Cancel"
-        android:layout_marginTop="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="@+id/buttonConfirmOrder"
         app:layout_constraintStart_toStartOf="@+id/buttonConfirmOrder"
         app:layout_constraintTop_toBottomOf="@+id/buttonConfirmOrder" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

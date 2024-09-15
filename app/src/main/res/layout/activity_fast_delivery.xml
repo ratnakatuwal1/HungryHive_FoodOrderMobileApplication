@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/BackgroundColor"
     tools:context=".fastDelivery">
 
     <TextView
@@ -16,7 +16,7 @@
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".1"
         android:text="@string/fastDelivery"
-        android:textColor="@color/primary_text_color"
+        android:textColor="@color/HeadingTextColor"
         android:textSize="@dimen/_30sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageDelivery"
@@ -33,7 +33,7 @@
         android:paddingEnd="@dimen/_5sdp"
         android:text="@string/fastDeliveryParagraph"
         android:textAlignment="center"
-        android:textColor="@color/primary_text_color"
+        android:textColor="@color/SubHeadingTextColor"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintEnd_toEndOf="@+id/textDelivery"
         app:layout_constraintStart_toStartOf="@+id/textDelivery"

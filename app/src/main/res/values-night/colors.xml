@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Neutral Background Colors -->
-    <color name="background_color">#2B2B2B</color>
-    <color name="primary_text_color">#E0E0E0</color>
-    <color name="accent_text_color">#C62828</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="SecondaryTextColor">#B0BEC5</color>
 
-    <!-- Button and Card Backgrounds -->
-    <color name="button_card_background">#424242</color>
-    <color name="button_text_color">#FFFFFF</color>
+    <color name="PrimaryColor">#FF6F61</color> <!-- Coral Red -->
+    <color name="AccentColor">#FFD54F</color> <!-- Sunshine Yellow -->
+    <color name="BackgroundColor">#1D1E22</color> <!-- Deep Charcoal -->
+    <color name="CardBackgroundColor">#2C2C34</color> <!-- Muted Black -->
 
-    <!-- Shadow and Glow Colors -->
-    <color name="shadow_color">#1AFFFFFF</color> <!-- rgba(255, 255, 255, 0.1) -->
-    <color name="border_color">#4D4D4D</color>
-
-    <!-- Icon Colors -->
-    <color name="icon_color">#E0E0E0</color>
-
-    <!-- Brand Colors -->
-    <color name="brand_red">#C62828</color>
-    <color name="brand_green">#4CAF50</color>
-    <color name="button_accent_color">#FF5722</color> <!-- Orange button -->
+    <!-- Text colors -->
+    <color name="HeadingTextColor">#F5F5F5</color> <!-- Off-White -->
+    <color name="SubHeadingTextColor">#B0BEC5</color> <!-- Muted Gray-Blue -->
+    <color name="ParagraphTextColor">#CFD8DC</color> <!-- Pale Gray -->
 </resources>
