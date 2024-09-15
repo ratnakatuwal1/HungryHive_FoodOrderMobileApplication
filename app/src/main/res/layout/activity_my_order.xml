@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".MyOrderActivity">
 
     <TextView
@@ -15,7 +16,7 @@
         android:fontFamily="@font/orbitron"
         android:textSize="@dimen/_24ssp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/HeadingTextColor"
         android:textStyle="bold"
         android:letterSpacing=".1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/textColor"
+            android:textColor="@color/SubHeadingTextColor"
             android:fontFamily="@font/zenantique"
             android:textSize="@dimen/_14ssp"
             android:text="Total Food Amount:"
@@ -63,7 +64,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/zenantique"
             android:textStyle="bold"
-            android:textColor="@color/textColor"
+            android:textColor="@color/SubHeadingTextColor"
             android:textSize="@dimen/_14ssp"
             android:text="Rs. 300"
             android:gravity="end"/>
@@ -80,7 +81,7 @@
             android:layout_weight="1"
             android:textSize="@dimen/_14ssp"
             android:fontFamily="@font/zenantique"
-            android:textColor="@color/textColor"
+            android:textColor="@color/SubHeadingTextColor"
             android:text="Delivery Charges:"
             android:textStyle="bold"/>
 
@@ -91,7 +92,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/zenantique"
             android:textStyle="bold"
-            android:textColor="@color/textColor"
+            android:textColor="@color/SubHeadingTextColor"
             android:textSize="@dimen/_14ssp"
             android:text="Rs. 100"
             android:gravity="end"/>
@@ -108,7 +109,7 @@
             android:layout_weight="1"
             android:textSize="@dimen/_14ssp"
             android:fontFamily="@font/zenantique"
-            android:textColor="@color/textColor"
+            android:textColor="@color/SubHeadingTextColor"
             android:text="Grand Total:"
             android:textStyle="bold"/>
 
@@ -119,7 +120,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/zenantique"
             android:textStyle="bold"
-            android:textColor="@color/textColor"
+            android:textColor="@color/SubHeadingTextColor"
             android:textSize="@dimen/_14ssp"
             android:text="Rs. 400"
             android:gravity="end"/>
@@ -128,7 +129,7 @@
             android:id="@+id/checkoutButton"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/proceed"
+            android:background="@drawable/nextbutton"
             android:fontFamily="@font/zenantique"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"

@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".registerScreen">
 
     <TextView
@@ -15,7 +16,7 @@
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".1"
         android:text="@string/createAccount"
-        android:textColor="@color/textColor"
+        android:textColor="@color/HeadingTextColor"
         android:textSize="@dimen/_28ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/zenantique"
         android:text="@string/toGetStarted"
-        android:textColor="@color/textColor"
+        android:textColor="@color/SubHeadingTextColor"
         android:textSize="@dimen/_18ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textCreateAccount"
@@ -48,8 +49,8 @@
         android:hint="@string/textBoxName"
         android:inputType="text"
         android:paddingStart="@dimen/_5sdp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/black"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/textGetStarted"
         app:layout_constraintStart_toStartOf="@+id/textGetStarted"
         app:layout_constraintTop_toBottomOf="@+id/textGetStarted" />
@@ -67,8 +68,8 @@
         android:hint="@string/textBoxEmail"
         android:inputType="textEmailAddress"
         android:paddingStart="@dimen/_5sdp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/black"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextName"
         app:layout_constraintStart_toStartOf="@+id/editTextName"
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
@@ -86,8 +87,8 @@
         android:hint="@string/textBoxPhone"
         android:inputType="phone"
         android:paddingStart="@dimen/_5sdp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/black"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextEmailAddress"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailAddress"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
@@ -105,8 +106,8 @@
         android:hint="@string/textBoxPassword"
         android:inputType="textPassword"
         android:paddingStart="@dimen/_5sdp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/black"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
         app:layout_constraintStart_toStartOf="@+id/editTextPhone"
         app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
@@ -124,8 +125,8 @@
         android:hint="@string/textBoxConfirmPassword"
         android:inputType="textPassword"
         android:paddingStart="@dimen/_5sdp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/black"
+        android:textColor="@color/ParagraphTextColor"
+        android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
@@ -155,7 +156,7 @@
         android:fontFamily="@font/zenantique"
         android:text="@string/textSignUpWith"
         android:textSize="@dimen/_18ssp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/SubHeadingTextColor"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/buttonSignup"
         app:layout_constraintStart_toStartOf="@+id/buttonSignup"
@@ -192,7 +193,7 @@
         android:textSize="@dimen/_18ssp"
         android:textStyle="bold"
         android:fontFamily="@font/zenantique"
-        android:textColor="@color/textColor"
+        android:textColor="@color/SubHeadingTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageFacebook" />
