@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".fragment.searchFragment">
 
 
@@ -49,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:text="@string/menu"
-        android:textColor="@color/black"
+        android:textColor="@color/HeadingTextColor"
         android:textStyle="bold"
         android:fontFamily="@font/orbitron"
         android:textSize="@dimen/_16ssp"

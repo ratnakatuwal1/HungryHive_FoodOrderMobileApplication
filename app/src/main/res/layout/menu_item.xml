@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/BackgroundColor"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -36,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_11sdp"
                 android:textSize="@dimen/_18ssp"
-                android:textColor="@color/textColor"
+                android:textColor="@color/ParagraphTextColor"
                 android:fontFamily="@font/zenantique"
                 android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="@+id/menuFoodImage"
@@ -50,7 +51,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/zenantique"
                 android:text="TextView"
-                android:textColor="@color/textColor"
+                android:textColor="@color/ParagraphTextColor"
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.588"
