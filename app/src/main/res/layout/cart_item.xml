@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/BackgroundColor">
 
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/_285sdp"
@@ -37,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:textSize="@dimen/_18ssp"
-                android:textColor="@color/textColor"
+                android:textColor="@color/ParagraphTextColor"
                 android:fontFamily="@font/zenantique"
                 android:text="TextView"
                 app:layout_constraintBottom_toTopOf="@+id/textFoodAmount"
@@ -50,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:fontFamily="@font/zenantique"
-                android:textColor="@color/textColor"
+                android:textColor="@color/ParagraphTextColor"
                 android:textSize="@dimen/_14ssp"
                 android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -75,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/zenantique"
-                android:textColor="@color/textColor"
+                android:textColor="@color/ParagraphTextColor"
                 android:textSize="@dimen/_14ssp"
                 android:text="1"
                 app:layout_constraintBottom_toBottomOf="@+id/buttonPlus"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".fragment.menuFragment">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
         android:textSize="@dimen/_24ssp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/HeadingTextColor"
         android:textStyle="bold"
         android:fontFamily="@font/orbitron"
         android:gravity="center"

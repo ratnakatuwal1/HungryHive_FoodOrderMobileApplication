@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".welComeScreen">
 
     <ImageView
@@ -26,7 +27,7 @@
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".1"
         android:text="@string/app_name"
-        android:textColor="@color/black"
+        android:textColor="@color/HeadingTextColor"
         android:textSize="@dimen/_35ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -41,7 +42,7 @@
         android:fontFamily="@font/zenantique"
         android:text="@string/slogan"
         android:textAlignment="center"
-        android:textColor="@color/textColor"
+        android:textColor="@color/SubHeadingTextColor"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"

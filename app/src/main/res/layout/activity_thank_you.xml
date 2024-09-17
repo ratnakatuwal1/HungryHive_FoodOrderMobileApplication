@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".ThankYouActivity">
 
     <TextView
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Congrats!"
         android:textSize="@dimen/_30sdp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/HeadingTextColor"
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".14"
         android:textStyle="bold"
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="@string/congratsTitle"
         android:layout_marginTop="@dimen/_24sdp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/SubHeadingTextColor"
         android:fontFamily="@font/zenantique"
         android:textSize="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="@+id/textViewCongrats"
@@ -49,7 +50,7 @@
         android:id="@+id/buttonGoHome"
         android:layout_width="@dimen/_260sdp"
         android:layout_height="@dimen/_35sdp"
-        android:background="@drawable/proceed"
+        android:background="@drawable/nextbutton"
         android:fontFamily="@font/zenantique"
         android:textSize="@dimen/_14ssp"
         android:textColor="@color/white"
