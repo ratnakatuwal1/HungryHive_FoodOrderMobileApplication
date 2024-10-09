@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.ratna.hungryhive" />
+                  <option name="mobileSdkAppId" value="1:514624847078:android:d3b5936fe8554b281d0f27" />
+                  <option name="projectId" value="hungry-hive-ccd15" />
+                  <option name="projectNumber" value="514624847078" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
