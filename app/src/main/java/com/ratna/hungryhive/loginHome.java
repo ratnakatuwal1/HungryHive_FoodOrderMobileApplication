@@ -23,7 +23,7 @@ public class loginHome extends AppCompatActivity {
         });
 
         buttonSignup.setOnClickListener(view -> {
-            Intent iNext = new Intent(loginHome.this, homeScreen.class);
+            Intent iNext = new Intent(loginHome.this, registerScreen.class);
             startActivity(iNext);
         });
     }

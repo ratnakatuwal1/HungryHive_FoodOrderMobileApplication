@@ -100,17 +100,20 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/lock"
+        android:drawableEnd="@drawable/eye_show_svgrepo_com"
         android:drawablePadding="@dimen/_10sdp"
         android:ems="10"
         android:fontFamily="@font/zenantique"
         android:hint="@string/textBoxPassword"
         android:inputType="textPassword"
         android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_10sdp"
         android:textColor="@color/ParagraphTextColor"
         android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
         app:layout_constraintStart_toStartOf="@+id/editTextPhone"
         app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+
 
     <EditText
         android:id="@+id/editTextConfirmPassword"
@@ -119,6 +122,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/lock"
+        android:drawableEnd="@drawable/eye_show_svgrepo_com"
         android:drawablePadding="@dimen/_10sdp"
         android:ems="10"
         android:fontFamily="@font/zenantique"
@@ -155,8 +159,8 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:fontFamily="@font/zenantique"
         android:text="@string/textSignUpWith"
-        android:textSize="@dimen/_18ssp"
         android:textColor="@color/SubHeadingTextColor"
+        android:textSize="@dimen/_18ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/buttonSignup"
         app:layout_constraintStart_toStartOf="@+id/buttonSignup"
@@ -167,50 +171,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
-        app:layout_constraintEnd_toStartOf="@+id/imageFacebook"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textSignupWith"
+        app:layout_constraintStart_toStartOf="@+id/textSignupWith"
         app:layout_constraintTop_toBottomOf="@+id/textSignupWith"
         app:srcCompat="@drawable/google" />
-
-    <ImageView
-        android:id="@+id/imageFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageGoogle"
-        app:layout_constraintTop_toBottomOf="@+id/textSignupWith"
-        app:srcCompat="@drawable/facebook" />
 
     <TextView
         android:id="@+id/textAlreadyHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/zenantique"
         android:text="@string/textAlreadyHaveAccount"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/SubHeadingTextColor"
         android:textSize="@dimen/_18ssp"
         android:textStyle="bold"
-        android:fontFamily="@font/zenantique"
-        android:textColor="@color/SubHeadingTextColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageFacebook" />
+        app:layout_constraintEnd_toEndOf="@+id/imageGoogle"
+        app:layout_constraintStart_toStartOf="@+id/imageGoogle"
+        app:layout_constraintTop_toBottomOf="@+id/imageGoogle" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLoginNow"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_47sdp"
-        android:text="@string/buttonLoginNow"
+        android:layout_marginBottom="@dimen/_30sdp"
         android:background="@drawable/nextbutton"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:fontFamily="@font/zenantique"
-        android:textSize="@dimen/_20ssp"
         android:letterSpacing=".1"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="@+id/textAlreadyHaveAccount"
-        app:layout_constraintStart_toStartOf="@+id/textAlreadyHaveAccount"
-        app:layout_constraintTop_toBottomOf="@+id/textAlreadyHaveAccount" />
+        android:text="@string/buttonLoginNow"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

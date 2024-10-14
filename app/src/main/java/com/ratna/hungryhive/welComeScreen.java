@@ -18,6 +18,7 @@ public class welComeScreen extends AppCompatActivity {
         button.setOnClickListener(view -> {
             Intent iNext = new Intent(welComeScreen.this, loginHome.class);
             startActivity(iNext);
+            finish();
         });
     }
 }

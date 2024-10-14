@@ -18,6 +18,7 @@ public class fastDelivery extends AppCompatActivity {
         button.setOnClickListener(view -> {
             Intent iNext = new Intent(fastDelivery.this, welComeScreen.class);
             startActivity(iNext);
+            finish();
         });
     }
 }

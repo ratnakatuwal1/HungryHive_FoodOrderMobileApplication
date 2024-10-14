@@ -18,6 +18,7 @@ public class findFood extends AppCompatActivity {
         button.setOnClickListener(view -> {
             Intent iNext = new Intent(findFood.this, fastDelivery.class);
             startActivity(iNext);
+            finish();
         });
     }
 }
