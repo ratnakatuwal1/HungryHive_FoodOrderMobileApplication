@@ -6,7 +6,7 @@
     <string name="slogan">Where Every Bite is a Sweet Treat!</string>
     <string name="getStartedButton">Get Started</string>
     <string name="loginButton">Login</string>
-    <string name="signupButton">Sign Up</string>
+    <string name="signupButton">Create Account</string>
     <string name="deliveryImage">Delivery Image</string>
     <string name="welcomeText">Welcome...</string>
     <string name="gladText">Glad To See You!</string>
@@ -48,4 +48,5 @@
     <string name="logo_image">Logo Image</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
+    <string name="default_web_client_id">514624847078-v1ajuj42ben1o2t2nhf2kibn7uu0jt46.apps.googleusercontent.com</string>
 </resources>

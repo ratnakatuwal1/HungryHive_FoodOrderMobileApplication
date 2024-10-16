@@ -42,7 +42,7 @@
         android:layout_height="@dimen/_47sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/edittext"
-        android:drawableStart="@drawable/person"
+        android:drawableStart="@drawable/user"
         android:drawablePadding="@dimen/_10sdp"
         android:ems="10"
         android:fontFamily="@font/zenantique"
@@ -129,6 +129,7 @@
         android:hint="@string/textBoxConfirmPassword"
         android:inputType="textPassword"
         android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_10sdp"
         android:textColor="@color/ParagraphTextColor"
         android:textColorHint="@color/SecondaryTextColor"
         app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
@@ -153,12 +154,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword" />
 
     <TextView
-        android:id="@+id/textSignupWith"
+        android:id="@+id/textAlreadyHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
         android:fontFamily="@font/zenantique"
-        android:text="@string/textSignUpWith"
+        android:text="@string/textAlreadyHaveAccount"
+        android:layout_marginTop="@dimen/_15sdp"
         android:textColor="@color/SubHeadingTextColor"
         android:textSize="@dimen/_18ssp"
         android:textStyle="bold"
@@ -166,43 +167,19 @@
         app:layout_constraintStart_toStartOf="@+id/buttonSignup"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignup" />
 
-    <ImageView
-        android:id="@+id/imageGoogle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        app:layout_constraintEnd_toEndOf="@+id/textSignupWith"
-        app:layout_constraintStart_toStartOf="@+id/textSignupWith"
-        app:layout_constraintTop_toBottomOf="@+id/textSignupWith"
-        app:srcCompat="@drawable/google" />
-
-    <TextView
-        android:id="@+id/textAlreadyHaveAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/zenantique"
-        android:text="@string/textAlreadyHaveAccount"
-        android:textColor="@color/SubHeadingTextColor"
-        android:textSize="@dimen/_18ssp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageGoogle"
-        app:layout_constraintStart_toStartOf="@+id/imageGoogle"
-        app:layout_constraintTop_toBottomOf="@+id/imageGoogle" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLoginNow"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_47sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
         android:background="@drawable/nextbutton"
         android:fontFamily="@font/zenantique"
         android:letterSpacing=".1"
+        android:layout_marginTop="@dimen/_15sdp"
         android:text="@string/buttonLoginNow"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAlreadyHaveAccount" />
 </androidx.constraintlayout.widget.ConstraintLayout>
