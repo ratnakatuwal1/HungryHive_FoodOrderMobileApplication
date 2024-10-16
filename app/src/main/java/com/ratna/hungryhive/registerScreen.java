@@ -10,41 +10,24 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ratna.hungryhive.model.UserModel;
 
 public class registerScreen extends AppCompatActivity {
     Button buttonSignup, buttonLoginNow;
     EditText editTextName, editTextEmailAddress, editTextPhone, editTextPassword, editTextConfirmPassword;
 
-    private String Email;
-    private String Password;
-    private String Name;
-    private String Phone;
-    private String ConfirmPassword;
+    private String Email, Name, Phone, Password, ConfirmPassword;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     boolean isPasswordVisible = false;
@@ -63,51 +46,11 @@ public class registerScreen extends AppCompatActivity {
         buttonLoginNow = findViewById(R.id.buttonLoginNow);
         buttonSignup = findViewById(R.id.buttonSignup);
 
-
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
-        editTextPassword.setOnTouchListener((view, motionEvent) -> {
-            int DRAWABLE_END = 2;
-            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                if (motionEvent.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_END].getBounds().width())) {
-                    if (isPasswordVisible) {
-                        editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.lock, 0, R.drawable.eye_show_svgrepo_com, 0);
-                    } else {
-                        editTextPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                        editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.lock, 0, R.drawable.eyeoff, 0);
-                    }
-                    isPasswordVisible = !isPasswordVisible;
-                    editTextPassword.setSelection(editTextPassword.getText().length());
-
-                    view.performClick();
-                    return true;
-                }
-            }
-            return false;
-        });
-
-        editTextConfirmPassword.setOnTouchListener((view, motionEvent) -> {
-            int DRAWABLE_END = 2;
-            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                if (motionEvent.getRawX() >= (editTextConfirmPassword.getRight() - editTextConfirmPassword.getCompoundDrawables()[DRAWABLE_END].getBounds().width())) {
-                    if (isPasswordVisible) {
-                        editTextConfirmPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        editTextConfirmPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.lock, 0, R.drawable.eye_show_svgrepo_com, 0);
-                    } else {
-                        editTextConfirmPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                        editTextConfirmPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.lock, 0, R.drawable.eyeoff, 0);
-                    }
-                    isPasswordVisible = !isPasswordVisible;
-                    editTextConfirmPassword.setSelection(editTextConfirmPassword.getText().length());
-
-                    view.performClick();
-                    return true;
-                }
-            }
-            return false;
-        });
+        setupPasswordVisibilityToggle(editTextPassword);
+        setupPasswordVisibilityToggle(editTextConfirmPassword);
 
         buttonLoginNow.setOnClickListener(view -> {
             Intent intent = new Intent(registerScreen.this, loginScreen.class);
@@ -122,33 +65,152 @@ public class registerScreen extends AppCompatActivity {
             Password = editTextPassword.getText().toString().trim();
             ConfirmPassword = editTextConfirmPassword.getText().toString().trim();
 
-            if (Name.isEmpty() || Phone.isEmpty() || Email.isEmpty() || Password.isEmpty() || ConfirmPassword.isEmpty()) {
-                Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-            } else if (!Email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
-                Toast.makeText(this, "Invalid Email Format", Toast.LENGTH_SHORT).show();
-            } else if (Phone.length() != 10) {
-                Toast.makeText(this, "Invalid Phone Number", Toast.LENGTH_SHORT).show();
-            } else if (!Password.equals(ConfirmPassword)) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-            } else {
+            if (validateInputs()) {
                 createAccount(Email, Password);
             }
         });
+    }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupPasswordVisibilityToggle(EditText editText) {
+        editText.setOnTouchListener((view, motionEvent) -> {
+            int DRAWABLE_END = 2;
+            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                if (motionEvent.getRawX() >= (editText.getRight() - editText.getCompoundDrawables()[DRAWABLE_END].getBounds().width())) {
+                    togglePasswordVisibility(editText);
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
 
+    // Toggle the visibility of the password field
+    private void togglePasswordVisibility(EditText editText) {
+        if (isPasswordVisible) {
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            editText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.lock, 0, R.drawable.eye_show_svgrepo_com, 0);
+        } else {
+            editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            editText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.lock, 0, R.drawable.eyeoff, 0);
+        }
+        isPasswordVisible = !isPasswordVisible;
+        editText.setSelection(editText.getText().length());
+    }
+
+    private boolean validateInputs() {
+        if (Name.isEmpty() && Email.isEmpty() && Phone.isEmpty() && Password.isEmpty() && ConfirmPassword.isEmpty()) {
+            Toast.makeText(this, "All fields are missing. Please fill in the required information.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (Name.isEmpty()) {
+            Toast.makeText(this, "Name field is missing. Please enter your name.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (Email.isEmpty()) {
+            Toast.makeText(this, "Email field is missing. Please enter your email.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!isValidEmail(Email)) {
+            Toast.makeText(this, "Invalid Email Format", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (Phone.isEmpty()) {
+            Toast.makeText(this, "Phone field is missing. Please enter your phone number.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!isValidPhone(Phone)) {
+            Toast.makeText(this, "Invalid Phone Number. It should contain 10 digits.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (Password.isEmpty()) {
+            Toast.makeText(this, "Password field is missing. Please enter your password.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!isValidPassword(Password)) {
+            Toast.makeText(this, "Password must be more than 8 characters long.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (ConfirmPassword.isEmpty()) {
+            Toast.makeText(this, "Please confirm your password.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!Password.equals(ConfirmPassword)) {
+            Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidEmail(String email) {
+        return email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+");
+    }
+
+    private boolean isValidPhone(String phone) {
+        return phone.length() == 10 && phone.matches("\\d+");
+    }
+
+    private boolean isValidPassword(String password) {
+        return password.length() > 8;
     }
 
 
     private void createAccount(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Toast.makeText(this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                saveUserData();
-                Intent intent = new Intent(registerScreen.this, loginScreen.class);
-                startActivity(intent);
-                finish();
+        checkIfEmailOrPhoneExists(Email, Phone, exists -> {
+            if (exists) {
+                Toast.makeText(registerScreen.this, "Email or Phone already in use. Please use different one.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Account Creation Failed", Toast.LENGTH_SHORT).show();
+                // Create the user if the email or phone is not in use
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(registerScreen.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                        saveUserData();
+                        Intent intent = new Intent(registerScreen.this, loginScreen.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(registerScreen.this, "Account Creation Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    private void checkIfEmailOrPhoneExists(String email, String phone, OnCheckCompleteListener listener) {
+        databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    listener.onCheckComplete(true);
+                } else {
+                    // Check if the phone number exists
+                    databaseReference.orderByChild("phone").equalTo(phone).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            listener.onCheckComplete(snapshot.exists());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.e(TAG, "onCancelled: DatabaseError", error.toException());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "onCancelled: DatabaseError", error.toException());
             }
         });
     }
@@ -163,5 +225,9 @@ public class registerScreen extends AppCompatActivity {
         UserModel user = new UserModel(Name, Email, Phone, Password, ConfirmPassword);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference.child(userId).setValue(user);
+    }
+
+    interface OnCheckCompleteListener {
+        void onCheckComplete(boolean exists);
     }
 }

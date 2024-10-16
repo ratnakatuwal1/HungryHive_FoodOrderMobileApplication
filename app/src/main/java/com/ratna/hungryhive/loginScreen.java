@@ -149,6 +149,16 @@ public class loginScreen extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(loginScreen.this, homeScreen.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     private void saveUserDataGoogle(FirebaseUser firebaseUser) {
         Name = firebaseUser.getDisplayName();
         Email = firebaseUser.getEmail();

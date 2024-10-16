@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-07-31T10:39:02.602032900Z">
+        <DropdownSelection timestamp="2024-10-16T10:51:21.747785200Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RZ8MB21Z92J" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\tandu\.android\avd\RatnaGalaxyA50_API_30.avd" />
             </handle>
           </Target>
         </DropdownSelection>
