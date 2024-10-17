@@ -13,6 +13,7 @@ import android.widget.SearchView;
 import com.ratna.hungryhive.R;
 import com.ratna.hungryhive.adapter.MenuAdapter;
 import com.ratna.hungryhive.databinding.FragmentSearchBinding;
+import com.ratna.hungryhive.model.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,15 +22,18 @@ import java.util.List;
 public class searchFragment extends Fragment {
     private FragmentSearchBinding binding;
     private MenuAdapter adapter;
-    private List<String> menuFoodName = Arrays.asList("Pizza", "Burger", "Pasta", "Pasta", "Pizza", "Burger", "Pasta", "Pasta");
-    private List<String> foodDescription = Arrays.asList("Delicious beef burger", "Cheesy pizza", "Creamy pasta", "Delicious beef burger", "Cheesy pizza", "Creamy pasta", "Delicious beef burger", "Cheesy pizza");
-    private List<String> menuFoodPrice = Arrays.asList("100", "200", "300", "400", "100", "200", "300", "400");
-    private List<Integer> menuFoodImage = Arrays.asList(R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta, R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta);
+    private List<MenuItem> menuItems = new ArrayList<>();
+    private List<MenuItem> filteredMenuItems = new ArrayList<>();
 
-    private List<String> filteredFoodName = new ArrayList<>();
-    private List<String> filteredDescription = new ArrayList<>();
-    private List<String> filteredFoodPrice = new ArrayList<>();
-    private List<Integer> filteredFoodImage = new ArrayList<>();
+//    private List<String> menuFoodName = Arrays.asList("Pizza", "Burger", "Pasta", "Pasta", "Pizza", "Burger", "Pasta", "Pasta");
+//    private List<String> foodDescription = Arrays.asList("Delicious beef burger", "Cheesy pizza", "Creamy pasta", "Delicious beef burger", "Cheesy pizza", "Creamy pasta", "Delicious beef burger", "Cheesy pizza");
+//    private List<String> menuFoodPrice = Arrays.asList("100", "200", "300", "400", "100", "200", "300", "400");
+//    private List<Integer> menuFoodImage = Arrays.asList(R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta, R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta);
+//
+//    private List<String> filteredFoodName = new ArrayList<>();
+//    private List<String> filteredDescription = new ArrayList<>();
+//    private List<String> filteredFoodPrice = new ArrayList<>();
+//    private List<Integer> filteredFoodImage = new ArrayList<>();
 
     public searchFragment() {
         // Required empty public constructor
@@ -39,28 +43,31 @@ public class searchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
-        adapter = new MenuAdapter(requireContext(), filteredFoodName, filteredDescription, filteredFoodPrice, filteredFoodImage);
+        adapter = new MenuAdapter(requireContext(), filteredMenuItems);
         binding.menuRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.menuRecyclerView.setAdapter(adapter);
 
+        populateMenuItems();
         setupSearchView();
-        showAllMenu();
         return binding.getRoot();
+//        setupSearchView();
+//        showAllMenu();
+//        return binding.getRoot();
     }
 
-    private void showAllMenu() {
-        filteredFoodName.clear();
-        filteredDescription.clear();
-        filteredFoodPrice.clear();
-        filteredFoodImage.clear();
+    private void populateMenuItems() {
+//        menuItems.add(new MenuItem("Pizza", "100", "Cheesy pizza", "https://example.com/pizza_image.jpg"));
+//        menuItems.add(new MenuItem("Burger", "200", "Delicious beef burger", "https://example.com/burger_image.jpg"));
+//        menuItems.add(new MenuItem("Pasta", "300", "Creamy pasta", "https://example.com/pasta_image.jpg"));
 
-        filteredFoodName.addAll(menuFoodName);
-        filteredDescription.addAll(foodDescription);
-        filteredFoodPrice.addAll(menuFoodPrice);
-        filteredFoodImage.addAll(menuFoodImage);
+        showAllMenuItems();
 
+    }
+
+    private void showAllMenuItems() {
+        filteredMenuItems.clear();
+        filteredMenuItems.addAll(menuItems);
         adapter.notifyDataSetChanged();
-
     }
 
     private void setupSearchView() {
@@ -79,19 +86,11 @@ public class searchFragment extends Fragment {
         });
     }
 
-    private void filterMenuItems(String s) {
-        filteredFoodName.clear();
-        filteredDescription.clear();
-        filteredFoodPrice.clear();
-        filteredFoodImage.clear();
-
-        for (int i = 0; i < menuFoodName.size(); i++) {
-            String foodName = menuFoodName.get(i);
-            if (foodName.toLowerCase().contains(s.toLowerCase())) {
-                filteredFoodName.add(menuFoodName.get(i));
-                filteredDescription.add(foodDescription.get(i));
-                filteredFoodPrice.add(menuFoodPrice.get(i));
-                filteredFoodImage.add(menuFoodImage.get(i));
+    private void filterMenuItems(String query) {
+        filteredMenuItems.clear();
+        for (MenuItem item : menuItems) {
+            if (item.getFoodName().toLowerCase().contains(query.toLowerCase())) {
+                filteredMenuItems.add(item);
             }
         }
         adapter.notifyDataSetChanged();

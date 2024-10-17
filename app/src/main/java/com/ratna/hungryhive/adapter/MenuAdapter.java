@@ -8,24 +8,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ratna.hungryhive.FoodDescriptionActivity;
 import com.ratna.hungryhive.databinding.MenuItemBinding;
+import com.ratna.hungryhive.model.MenuItem;
 
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
-    private List<String> items;
-    private List<String> descriptions;
-    private List<String> prices;
-    private List<Integer> images;
+
+    private List<MenuItem> menuItems;
     private Context context;
 
-    public MenuAdapter(Context context, List<String> items, List<String> descriptions, List<String> prices, List<Integer> images) {
+    public MenuAdapter(Context context, List<MenuItem> menuItems) {
         this.context = context;
-        this.items = items;
-        this.descriptions = descriptions;
-        this.prices = prices;
-        this.images = images;
+        this.menuItems = menuItems;
     }
 
     @NonNull
@@ -37,24 +34,22 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MenuAdapter.MenuViewHolder holder, int position) {
-        String item = items.get(position);
-        String description = descriptions.get(position);
-        String price = prices.get(position);
-        int image = images.get(position);
-        holder.bind(item, description, price, image);
+       MenuItem menuItem = menuItems.get(position);
+       holder.bind(menuItem);
 
-        holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(context, FoodDescriptionActivity.class);
-            intent.putExtra("food_name", item);
-            intent.putExtra("food_description", description);
-            intent.putExtra("food_image", image);
-            context.startActivity(intent);
-        });
+       holder.itemView.setOnClickListener(view -> {
+           Intent intent = new Intent(context, FoodDescriptionActivity.class);
+           intent.putExtra("food_name", menuItem.getFoodName());
+           intent.putExtra("food_description", menuItem.getFoodDescription());
+           intent.putExtra("food_price", menuItem.getFoodPrice());
+           intent.putExtra("food_image", menuItem.getFoodImage());
+           context.startActivity(intent);
+       });
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return menuItems.size();
     }
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
@@ -65,10 +60,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             this.binding = binding;
         }
 
-        public void bind(String item, String description, String price, int image) {
-            binding.menuFoodName.setText(item);
-            binding.menuFoodPrice.setText(price);
-            binding.menuFoodImage.setImageResource(image);
+        public void bind(MenuItem menuItem) {
+           binding.menuFoodName.setText(menuItem.getFoodName());
+           binding.menuFoodPrice.setText(menuItem.getFoodPrice());
+            Glide.with(binding.menuFoodImage.getContext()).load(menuItem.getFoodImage()).into(binding.menuFoodImage);
         }
     }
 }
