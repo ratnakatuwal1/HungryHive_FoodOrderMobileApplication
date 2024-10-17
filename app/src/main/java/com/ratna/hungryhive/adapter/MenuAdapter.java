@@ -34,17 +34,18 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MenuAdapter.MenuViewHolder holder, int position) {
-       MenuItem menuItem = menuItems.get(position);
-       holder.bind(menuItem);
+        MenuItem menuItem = menuItems.get(position);
+        holder.bind(menuItem);
 
-       holder.itemView.setOnClickListener(view -> {
-           Intent intent = new Intent(context, FoodDescriptionActivity.class);
-           intent.putExtra("food_name", menuItem.getFoodName());
-           intent.putExtra("food_description", menuItem.getFoodDescription());
-           intent.putExtra("food_price", menuItem.getFoodPrice());
-           intent.putExtra("food_image", menuItem.getFoodImage());
-           context.startActivity(intent);
-       });
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, FoodDescriptionActivity.class);
+            intent.putExtra("food_name", menuItem.getFoodName());
+            intent.putExtra("food_description", menuItem.getFoodDescription());
+            intent.putExtra("food_price", menuItem.getFoodPrice());
+            intent.putExtra("food_image", menuItem.getFoodImage());
+            intent.putExtra("food_ingredients", menuItem.getFoodIngredients());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -61,8 +62,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         }
 
         public void bind(MenuItem menuItem) {
-           binding.menuFoodName.setText(menuItem.getFoodName());
-           binding.menuFoodPrice.setText(menuItem.getFoodPrice());
+            binding.menuFoodName.setText(menuItem.getFoodName());
+            binding.menuFoodPrice.setText(menuItem.getFoodPrice());
             Glide.with(binding.menuFoodImage.getContext()).load(menuItem.getFoodImage()).into(binding.menuFoodImage);
         }
     }

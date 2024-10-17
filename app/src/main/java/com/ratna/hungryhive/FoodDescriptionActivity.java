@@ -1,9 +1,13 @@
 package com.ratna.hungryhive;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 
 public class FoodDescriptionActivity extends AppCompatActivity {
     private String foodName;
@@ -24,6 +28,20 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         foodImage = getIntent().getStringExtra("food_image");
         foodPrice = getIntent().getStringExtra("food_price");
         foodIngredients = getIntent().getStringExtra("food_ingredients");
+
+        TextView textViewFoodName = findViewById(R.id.textViewFoodName);
+        TextView textViewDescriptionPara = findViewById(R.id.textViewDescriptionPara);
+        TextView textViewFoodPrice = findViewById(R.id.textViewFoodPrice);
+        TextView textViewFoodIngredients = findViewById(R.id.textViewIngredientsList);
+        ImageView imageViewFood = findViewById(R.id.imageFood);
+
+        textViewFoodName.setText(foodName);
+        textViewDescriptionPara.setText(foodDescription);
+        textViewFoodPrice.setText("Price: " + foodPrice);
+        textViewFoodIngredients.setText("Ingredients: " + foodIngredients);
+
+        // Load the food image using Glide
+        Glide.with(this).load(foodImage).into(imageViewFood);
 
 
 
