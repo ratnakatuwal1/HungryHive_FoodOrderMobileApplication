@@ -12,7 +12,7 @@
         android:id="@+id/textCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".1"
         android:text="@string/createAccount"
@@ -38,9 +38,9 @@
 
     <EditText
         android:id="@+id/editTextName"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="@dimen/_47sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/user"
         android:drawablePadding="@dimen/_10sdp"
@@ -57,8 +57,8 @@
 
     <EditText
         android:id="@+id/editTextEmailAddress"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/mail"
@@ -76,8 +76,8 @@
 
     <EditText
         android:id="@+id/editTextPhone"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/phone"
@@ -95,8 +95,8 @@
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/lock"
@@ -117,8 +117,8 @@
 
     <EditText
         android:id="@+id/editTextConfirmPassword"
-        android:layout_width="@dimen/_230sdp"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/lock"
@@ -138,16 +138,17 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSignup"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_47sdp"
-        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/nextbutton"
         android:elevation="@dimen/_5sdp"
         android:fontFamily="@font/zenantique"
         android:letterSpacing=".1"
         android:text="@string/signupButton"
         android:textColor="@color/white"
-        android:textSize="@dimen/_22ssp"
+        android:textSize="@dimen/_20ssp"
+        android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/editTextConfirmPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextConfirmPassword"
@@ -169,8 +170,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLoginNow"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_47sdp"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_40sdp"
         android:background="@drawable/nextbutton"
         android:fontFamily="@font/zenantique"
         android:letterSpacing=".1"
@@ -179,6 +180,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textAlreadyHaveAccount" />

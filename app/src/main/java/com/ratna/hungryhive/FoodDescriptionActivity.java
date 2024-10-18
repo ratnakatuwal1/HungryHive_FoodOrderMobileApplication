@@ -38,7 +38,7 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         textViewFoodName.setText(foodName);
         textViewDescriptionPara.setText(foodDescription);
         textViewFoodPrice.setText("Price: " + foodPrice);
-        textViewFoodIngredients.setText("Ingredients: " + foodIngredients);
+        textViewFoodIngredients.setText(foodIngredients);
 
         // Load the food image using Glide
         Glide.with(this).load(foodImage).into(imageViewFood);

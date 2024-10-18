@@ -12,7 +12,7 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/orbitron"
         android:letterSpacing=".1"
         android:text="@string/welcomeText"
@@ -94,7 +94,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLogin"
-        android:layout_width="@dimen/_210sdp"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/nextbutton"
@@ -130,6 +130,7 @@
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:contentDescription="@string/google"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="@+id/textOrLoginWith"
         app:layout_constraintStart_toStartOf="@+id/textOrLoginWith"
         app:layout_constraintTop_toBottomOf="@+id/textOrLoginWith"
@@ -139,7 +140,7 @@
         android:id="@+id/textDoNotHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/zenantique"
         android:text="@string/doNotHaveAccount"
         android:textColor="@color/SubHeadingTextColor"
@@ -151,7 +152,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSignupNow"
-        android:layout_width="@dimen/_210sdp"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/nextbutton"
