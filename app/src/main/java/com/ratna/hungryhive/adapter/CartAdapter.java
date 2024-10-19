@@ -1,12 +1,16 @@
 package com.ratna.hungryhive.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.ratna.hungryhive.databinding.CartItemBinding;
+import com.ratna.hungryhive.model.CartItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,17 +18,31 @@ import java.util.List;
 
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-    private int[] itemQuantity;
-    private List<String> cartItems;
-    private List<String> cartPrices;
-    private List<Integer> cartImages;
+//    private int[] itemQuantity;
+//    private List<String> cartItems;
+//    private List<String> cartPrices;
+//    private List<Integer> cartImages;
+//    private List<String> cartDescriptions;
+//    private List<String> cartIngredients;
+//    private List<Integer> cartQuantities;
+//    private Context context;
+//    private FirebaseAuth mAuth;
+//    private String userId;
+    private List<CartItem> cartItems;
+    private Context context;
 
-    public CartAdapter(List<String> cartItems, List<String> cartPrices, List<Integer> cartImages) {
+    public CartAdapter(Context context, List<CartItem> cartItems) {
+//        this.cartItems = new ArrayList<>(cartItems);
+//        this.cartPrices = new ArrayList<>(cartPrices);
+//        this.cartImages = new ArrayList<>(cartImages);
+//        this.itemQuantity = new int[cartItems.size()];
+        this.context = context;
         this.cartItems = new ArrayList<>(cartItems);
-        this.cartPrices = new ArrayList<>(cartPrices);
-        this.cartImages = new ArrayList<>(cartImages);
-        this.itemQuantity = new int[cartItems.size()];
-        Arrays.fill(itemQuantity, 1);
+
+
+//        mAuth = FirebaseAuth.getInstance();
+//        userId = mAuth.getCurrentUser().getUid();
+//        Arrays.fill(itemQuantity, 1);
     }
 
     @NonNull
@@ -36,12 +54,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.CartViewHolder holder, int position) {
-        String item = cartItems.get(position);
-        String price = cartPrices.get(position);
-        int image = cartImages.get(position);
-        int quantity = itemQuantity[position];
+//        String item = cartItems.get(position);
+//        String price = cartPrices.get(position);
+//        int image = cartImages.get(position);
+//        int quantity = itemQuantity[position];
 
-        holder.bind(item, price, image, quantity, position);
+        CartItem cartItem = cartItems.get(position);
+
+        holder.bind(cartItem, position);
     }
 
     @Override
@@ -57,23 +77,30 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             this.binding = binding;
         }
 
-        public void bind(String item, String price, int image, int quantity, int position) {
-            binding.textFoodName.setText(item);
-            binding.textFoodAmount.setText(price);
-            binding.imageCartFood.setImageResource(image);
-            binding.textQty.setText(String.valueOf(quantity));
+        public void bind(CartItem cartItem, int position) {
+//            binding.textFoodName.setText(item);
+//            binding.textFoodAmount.setText(price);
+//            binding.imageCartFood.setImageResource(image);
+//            binding.textQty.setText(String.valueOf(quantity));
+            binding.textFoodName.setText(cartItem.getFoodName());
+            binding.textFoodAmount.setText(cartItem.getFoodPrice());
+            binding.textQty.setText(String.valueOf(cartItem.getFoodQuantity()));
+            Glide.with(context)
+                    .load(cartItem.getFoodDescription())  // Assuming 'foodDescription' holds the image URL
+                    .into(binding.imageCartFood);
+
 
             binding.buttonMinus.setOnClickListener(view -> {
-                if (itemQuantity[position] > 1) {
-                    itemQuantity[position]--;
-                    binding.textQty.setText(String.valueOf(itemQuantity[position]));
+                if (cartItem.getFoodQuantity() > 1) {
+                    cartItem.setFoodQuantity(cartItem.getFoodQuantity() - 1);
+                    binding.textQty.setText(String.valueOf(cartItem.getFoodQuantity()));
                 }
             });
 
             binding.buttonPlus.setOnClickListener(view -> {
-                if (itemQuantity[position] < 10) {
-                    itemQuantity[position]++;
-                    binding.textQty.setText(String.valueOf(itemQuantity[position]));
+                if (cartItem.getFoodQuantity() < 10) {
+                    cartItem.setFoodQuantity(cartItem.getFoodQuantity() + 1);
+                    binding.textQty.setText(String.valueOf(cartItem.getFoodQuantity()));
                 }
             });
 
@@ -85,15 +112,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     private void removeItem(int position) {
         cartItems.remove(position);
-        cartPrices.remove(position);
-        cartImages.remove(position);
-
-        int[] newQuantities = new int[itemQuantity.length - 1];
-        System.arraycopy(itemQuantity, 0, newQuantities, 0, position);
-        System.arraycopy(itemQuantity, position + 1, newQuantities, position, itemQuantity.length - position - 1);
-        itemQuantity = newQuantities;
-
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, cartItems.size());
+
+//        int[] newQuantities = new int[itemQuantity.length - 1];
+//        System.arraycopy(itemQuantity, 0, newQuantities, 0, position);
+//        System.arraycopy(itemQuantity, position + 1, newQuantities, position, itemQuantity.length - position - 1);
+//        itemQuantity = newQuantities;
+//
+//        notifyItemRemoved(position);
+//        notifyItemRangeChanged(position, cartItems.size());
     }
 }
