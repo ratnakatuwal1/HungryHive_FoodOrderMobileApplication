@@ -1,11 +1,11 @@
 package com.ratna.hungryhive.model;
 
 public class CartItem {
-    private String foodName;
-    private String foodPrice;
     private String foodDescription;
     private String foodImage;
     private String foodIngredients;
+    private String foodName;
+    private String foodPrice;
     private Integer foodQuantity;
 
     public CartItem(){

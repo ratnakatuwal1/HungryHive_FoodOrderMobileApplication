@@ -78,11 +78,13 @@ public class FoodDescriptionActivity extends AppCompatActivity {
 
     private void addItemToCart() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("users").child(mAuth.getCurrentUser().getUid()).child("CartItem");
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        CartItem cartItem = new CartItem(foodName, foodDescription, foodImage, foodPrice, foodIngredients, 1);
-        databaseReference.child("users").child(userId).child("CartItem").push().setValue(cartItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+        CartItem cartItem = new CartItem(foodName, foodPrice, foodDescription, foodImage, foodIngredients, 1);
+        //databaseReference.child("users").child(userId).child("CartItem").push().setValue(cartItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+        databaseReference.push().setValue(cartItem).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(FoodDescriptionActivity.this, "Item added into cart successfully!", Toast.LENGTH_SHORT).show();
