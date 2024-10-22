@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,8 +14,11 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ratna.hungryhive.FoodDescriptionActivity;
 import com.ratna.hungryhive.R;
 import com.ratna.hungryhive.databinding.CartItemBinding;
@@ -51,16 +55,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         this.cartItems = cartItems;
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser().getUid();
-       // int cartItemNumber = cartItems.size();
-//        int[] itemQuantity = new int[cartItemNumber];
-//        Arrays.fill(itemQuantity, 1);
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("CartItem");
 
 //        mAuth = FirebaseAuth.getInstance();
 //        userId = mAuth.getCurrentUser().getUid();
 //        Arrays.fill(itemQuantity, 1);
     }
-
 
 
     @NonNull
@@ -78,7 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 //        int quantity = itemQuantity[position];
 
         CartItem cartItem = cartItems.get(position);
-        Log.d("CartAdapter", "onBindViewHolder: Binding item at position " + position + " with name: " + cartItem.getFoodName());
+
         holder.bind(cartItem);
 
 //        holder.itemView.setOnClickListener(view -> {
@@ -118,9 +118,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
 
         public void bind(CartItem cartItem) {
-            Log.d("CartAdapter", "Binding item: " + cartItem.getFoodName());
-//            binding.textFoodName.setText(item);
-//            binding.textFoodAmount.setText(price);
+
 //            binding.imageCartFood.setImageResource(image);
 //            binding.textQty.setText(String.valueOf(quantity));
             binding.textFoodName.setText(cartItem.getFoodName());
@@ -136,7 +134,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     .into(binding.imageCartFood);
 
 // Log for successful Glide loading
-            Log.d("CartAdapter", "Glide loading image: " + cartItem.getFoodImage());
 
 
             binding.buttonMinus.setOnClickListener(view -> {
@@ -160,30 +157,80 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     private void removeItem(int position) {
-        CartItem cartItem = cartItems.get(position);
-     //   DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("CartItem");
-        databaseReference.child(cartItem.getFoodName()).removeValue()
-                .addOnSuccessListener(unused -> {
-                    cartItems.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, cartItems.size());
-                }).addOnFailureListener(new OnFailureListener() {
+  CartItem cartItem = cartItems.get(position);
+//    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("CartItem");
+//        //DatabaseReference itemRef = databaseReference.child(cartItem.getFoodName());
+//        databaseReference.child(cartItem.getFoodName()).removeValue()
+//        .addOnSuccessListener(unused -> {
+//                    cartItems.remove(position);
+//                    notifyItemRemoved(position);
+//                    notifyItemRangeChanged(position, cartItems.size());
+//                    Toast.makeText(context, "Item removed from cart", Toast.LENGTH_SHORT).show();
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                // Handle possible errors
+//                Log.d("CartAdapter", "Failed to remove item: " + e.getMessage());
+//                Toast.makeText(context, "Failed to remove item", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+
+        // Retrieve the unique key at the position in Firebase
+        getUniqueKeyAtPosition(position, new UniqueKeyCallback() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                // Handle possible errors
-                Log.e("CartAdapter", "Failed to remove item: " + e.getMessage());
+            public void onUniqueKeyRetrieved(String uniqueKey) {
+                if (uniqueKey != null) {
+                    deleteItem(position, uniqueKey);  // Call deleteItem using the unique key
+                } else {
+                    Log.d("CartAdapter", "No unique key found for position: " + position);
+                    Toast.makeText(context, "Failed to find item in Firebase", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-//        cartItems.remove(position);
-//        notifyItemRemoved(position);
- //notifyItemRangeChanged(position, cartItems.size());
+    }
 
-//        int[] newQuantities = new int[itemQuantity.length - 1];
-//        System.arraycopy(itemQuantity, 0, newQuantities, 0, position);
-//        System.arraycopy(itemQuantity, position + 1, newQuantities, position, itemQuantity.length - position - 1);
-//        itemQuantity = newQuantities;
-//
-//        notifyItemRemoved(position);
-//        notifyItemRangeChanged(position, cartItems.size());
+    private void deleteItem(int positionRetrieve, String uniqueKey) {
+            // if (uniqueKey != null) {
+            databaseReference.child(uniqueKey).removeValue()
+                    .addOnSuccessListener(unused -> {
+                        // Successfully removed from Firebase
+                        cartItems.remove(positionRetrieve);
+                        notifyItemRemoved(positionRetrieve);
+                        notifyItemRangeChanged(positionRetrieve, cartItems.size());
+                        Toast.makeText(context, "Item removed from cart", Toast.LENGTH_SHORT).show();
+
+                    }).addOnFailureListener(e -> {
+                        // Failed to remove the item
+                        Log.d("CartAdapter", "Failed to remove item: " + e.getMessage());
+                        Toast.makeText(context, "Failed to remove item", Toast.LENGTH_SHORT).show();
+                    });
+        }
+
+
+    private void getUniqueKeyAtPosition(int position, UniqueKeyCallback callback) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String uniqueKey = null;
+                int index = 0;
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    if (index == position) {
+                        uniqueKey = dataSnapshot.getKey();
+                        break;
+                    }
+                    index++;
+                }
+                callback.onUniqueKeyRetrieved(uniqueKey);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("CartAdapter", "Failed to retrieve unique key: " + error.getMessage());
+            }
+        });
+    }
+    public interface UniqueKeyCallback {
+        void onUniqueKeyRetrieved(String uniqueKey);
     }
 }

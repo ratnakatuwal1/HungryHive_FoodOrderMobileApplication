@@ -1,5 +1,6 @@
 package com.ratna.hungryhive.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -20,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ratna.hungryhive.MyOrderActivity;
 import com.ratna.hungryhive.R;
 import com.ratna.hungryhive.adapter.CartAdapter;
 import com.ratna.hungryhive.adapter.PopularAdapter;
@@ -38,7 +41,6 @@ public class cartFragment extends Fragment {
     private List<CartItem> cartItems;
     private CartAdapter cartAdapter;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase firebaseDatabase;
     private String userId;
 
     public cartFragment() {
@@ -57,10 +59,13 @@ public class cartFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser().getUid();
-        firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("CartItem");
 
-
+        Button buttonProceed = binding.getRoot().findViewById(R.id.buttonProceed);
+        buttonProceed.setOnClickListener(view -> {
+            Intent intent = new Intent(requireContext(), MyOrderActivity.class);
+            startActivity(intent);
+        });
 //        List<String> foodNames = Arrays.asList("pizza", "burger", "pasta", "pasta");
 //        List<Integer> foodImages = Arrays.asList(R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta);
 //        List<String> foodPrices = Arrays.asList("Rs. 100", "Rs. 200", "Rs. 300", "400");
@@ -99,5 +104,8 @@ public class cartFragment extends Fragment {
                 Log.d("CartError", "Database error: " + error.getMessage());
             }
         });
+
+
     }
+
 }

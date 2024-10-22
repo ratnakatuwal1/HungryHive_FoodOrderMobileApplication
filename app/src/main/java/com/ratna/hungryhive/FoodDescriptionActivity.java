@@ -1,5 +1,6 @@
 package com.ratna.hungryhive;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -88,6 +89,9 @@ public class FoodDescriptionActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(FoodDescriptionActivity.this, "Item added into cart successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(FoodDescriptionActivity.this, homeScreen.class);
+                startActivity(intent);
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
