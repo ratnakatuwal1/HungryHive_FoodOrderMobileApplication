@@ -35,17 +35,17 @@ public class CheckoutActivity extends AppCompatActivity {
         buttonConformOrder = findViewById(R.id.buttonConfirmOrder);
         buttonCancel = findViewById(R.id.buttonCancel);
 
-buttonConformOrder.setOnClickListener(view -> {
-    Intent intent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
-    startActivity(intent);
-    finish();
-});
+        buttonConformOrder.setOnClickListener(view -> {
+            Intent intent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
-buttonCancel.setOnClickListener(view -> {
-    Intent intent = new Intent(CheckoutActivity.this, homeScreen.class);
-    startActivity(intent);
-    finish();
-});
+        buttonCancel.setOnClickListener(view -> {
+            Intent intent = new Intent(CheckoutActivity.this, homeScreen.class);
+            startActivity(intent);
+            finish();
+        });
 
 
     }
