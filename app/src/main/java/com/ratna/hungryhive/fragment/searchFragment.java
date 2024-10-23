@@ -53,9 +53,11 @@ public class searchFragment extends Fragment {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Menu");
+        filteredMenuItems.clear();
         adapter = new MenuAdapter(requireContext(), filteredMenuItems);
         binding.menuRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.menuRecyclerView.setAdapter(adapter);
+        binding.noItemsTextView.setVisibility(View.GONE);
 
         fetchMenuItemsFromFirebase();
         setupSearchView();
@@ -81,7 +83,7 @@ public class searchFragment extends Fragment {
                     MenuItem menuItem = dataSnapshot.getValue(MenuItem.class);
                     menuItems.add(menuItem);
                 }
-                showAllMenuItems();
+                adapter.notifyDataSetChanged();
             }
 
             @Override

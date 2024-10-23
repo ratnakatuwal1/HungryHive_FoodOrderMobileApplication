@@ -6,22 +6,22 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.ratna.hungryhive.MyOrderActivity;
 import com.ratna.hungryhive.R;
 import com.ratna.hungryhive.adapter.CartAdapter;
@@ -36,7 +36,7 @@ import java.util.List;
 
 
 public class cartFragment extends Fragment {
-    private FragmentCartBinding binding;
+    //private FragmentCartBinding binding;
     private DatabaseReference databaseReference;
     private List<CartItem> cartItems;
     private CartAdapter cartAdapter;
@@ -50,32 +50,49 @@ public class cartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentCartBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        RecyclerView cartRecyclerView = view.findViewById(R.id.cartRecyclerView);
         cartItems = new ArrayList<>();
         cartAdapter = new CartAdapter(requireContext(), cartItems);
 
-        binding.cartRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.cartRecyclerView.setAdapter(cartAdapter);
+        cartRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        cartRecyclerView.setAdapter(cartAdapter);
 
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("CartItem");
 
-        Button buttonProceed = binding.getRoot().findViewById(R.id.buttonProceed);
-        buttonProceed.setOnClickListener(view -> {
-            Intent intent = new Intent(requireContext(), MyOrderActivity.class);
-            startActivity(intent);
+        Button buttonProceed = view.findViewById(R.id.buttonProceed);
+        buttonProceed.setOnClickListener(v -> {
+            Gson gson = new Gson();
+            String cartItemsJson = gson.toJson(cartItems);
+//            Log.d("CartFragment", "Cart Items JSON: " + cartItemsJson);
+            getOrderItemDetails(cartItemsJson);
         });
-//        List<String> foodNames = Arrays.asList("pizza", "burger", "pasta", "pasta");
-//        List<Integer> foodImages = Arrays.asList(R.drawable.pizza, R.drawable.burger, R.drawable.pasta, R.drawable.pasta);
-//        List<String> foodPrices = Arrays.asList("Rs. 100", "Rs. 200", "Rs. 300", "400");
-
-       // CartAdapter adapter = new CartAdapter(foodNames, foodPrices, foodImages);
-
-
         retrieveCartItems();
-        return binding.getRoot();
+        return view;
     }
+
+    private void getOrderItemDetails(String cartItemsJson) {
+        int totalQuantity = cartAdapter.getTotalQuantity();
+        Toast.makeText(requireContext(), "Total Quantity: " + totalQuantity, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(requireContext(), MyOrderActivity.class);
+        intent.putExtra("cartItems", cartItemsJson);
+        startActivity(intent);
+    }
+//    private void orderNow(List<String> foodNames, List<String> foodPrices, List<String> foodImages, List<String> foodDescriptions, List<String> foodIngredients, int foodQuantities) {
+//        if (isAdded() && getContext() != null){
+//            Intent intent = new Intent(requireContext(), MyOrderActivity.class);
+//            intent.putExtra("foodNames", (ArrayList<String>) foodNames);
+//            intent.putExtra("foodPrices", (ArrayList<String>) foodPrices);
+//            intent.putExtra("foodImages", (ArrayList<String>) foodImages);
+//            intent.putExtra("foodDescriptions", (ArrayList<String>) foodDescriptions);
+//            intent.putExtra("foodIngredients", (ArrayList<String>) foodIngredients);
+//            intent.putExtra("foodQuantities", foodQuantities);
+//            startActivity(intent);
+//
+//        }
+//    }
 
     private void retrieveCartItems() {
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -96,7 +113,6 @@ public class cartFragment extends Fragment {
                     Log.d("cartFragment", "No data found for CartItem in Firebase");
                 }
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

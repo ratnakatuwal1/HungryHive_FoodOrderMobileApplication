@@ -72,41 +72,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-//        String item = cartItems.get(position);
-//        String price = cartPrices.get(position);
-//        int image = cartImages.get(position);
-//        int quantity = itemQuantity[position];
-
         CartItem cartItem = cartItems.get(position);
-
         holder.bind(cartItem);
-
-//        holder.itemView.setOnClickListener(view -> {
-//            Intent intent = new Intent(context, FoodDescriptionActivity.class);
-//            intent.putExtra("food_name", cartItem.getFoodName());
-//            intent.putExtra("food_description", cartItem.getFoodDescription());
-//            intent.putExtra("food_price", cartItem.getFoodPrice());
-//            intent.putExtra("food_image", cartItem.getFoodImage());
-//            intent.putExtra("food_ingredients", cartItem.getFoodIngredients());
-//            intent.putExtra("food_quantity", cartItem.getFoodQuantity());
-//            context.startActivity(intent);
-//        });
-
-//        holder.binding.textFoodName.setText(cartItem.getFoodName());
-//        holder.binding.textFoodAmount.setText(cartItem.getFoodPrice());
-//        holder.binding.textQty.setText(String.valueOf(cartItem.getFoodQuantity()));
-
-        // Ensure Glide is loading the correct image
-//        Glide.with(context)
-//                .load(cartItem.getFoodImage())   // Ensure the image URL is correctly passed
-//                .into(holder.binding.imageCartFood);
-//
-//        holder.bind(cartItem, position);
     }
 
     @Override
     public int getItemCount() {
         return cartItems.size();
+    }
+
+    public int getTotalQuantity() {
+        int totalQuantity = 0;
+        for (CartItem cartItem : cartItems) {
+            totalQuantity += cartItem.getFoodQuantity();
+        }
+        return totalQuantity;
     }
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
@@ -133,9 +113,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     .error(R.drawable.burger)  // Add an error image in case of failure
                     .into(binding.imageCartFood);
 
-// Log for successful Glide loading
-
-
             binding.buttonMinus.setOnClickListener(view -> {
                 if (cartItem.getFoodQuantity() > 1) {
                     cartItem.setFoodQuantity(cartItem.getFoodQuantity() - 1);
@@ -158,23 +135,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     private void removeItem(int position) {
   CartItem cartItem = cartItems.get(position);
-//    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("CartItem");
-//        //DatabaseReference itemRef = databaseReference.child(cartItem.getFoodName());
-//        databaseReference.child(cartItem.getFoodName()).removeValue()
-//        .addOnSuccessListener(unused -> {
-//                    cartItems.remove(position);
-//                    notifyItemRemoved(position);
-//                    notifyItemRangeChanged(position, cartItems.size());
-//                    Toast.makeText(context, "Item removed from cart", Toast.LENGTH_SHORT).show();
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                // Handle possible errors
-//                Log.d("CartAdapter", "Failed to remove item: " + e.getMessage());
-//                Toast.makeText(context, "Failed to remove item", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
 
         // Retrieve the unique key at the position in Firebase
         getUniqueKeyAtPosition(position, new UniqueKeyCallback() {
@@ -190,14 +150,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         });
     }
 
-    private void deleteItem(int positionRetrieve, String uniqueKey) {
+    private void deleteItem(int position, String uniqueKey) {
             // if (uniqueKey != null) {
             databaseReference.child(uniqueKey).removeValue()
                     .addOnSuccessListener(unused -> {
                         // Successfully removed from Firebase
-                        cartItems.remove(positionRetrieve);
-                        notifyItemRemoved(positionRetrieve);
-                        notifyItemRangeChanged(positionRetrieve, cartItems.size());
+                        cartItems.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, cartItems.size());
                         Toast.makeText(context, "Item removed from cart", Toast.LENGTH_SHORT).show();
 
                     }).addOnFailureListener(e -> {
