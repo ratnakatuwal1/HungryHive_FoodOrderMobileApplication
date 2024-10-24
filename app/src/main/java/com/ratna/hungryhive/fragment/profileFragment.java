@@ -12,11 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ratna.hungryhive.ChangePassword;
 import com.ratna.hungryhive.EditProfile;
 import com.ratna.hungryhive.R;
 import com.ratna.hungryhive.adapter.RecentItemAdapter;
 import com.ratna.hungryhive.databinding.FragmentProfileBinding;
+import com.ratna.hungryhive.loginScreen;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +28,9 @@ import java.util.List;
 
 public class profileFragment extends Fragment {
     Button buttonEditProfile, buttonLogout, changePasswordButton;
+    RecyclerView profileRecycleView;
+    private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
 
 
     private FragmentProfileBinding binding;
@@ -41,6 +48,10 @@ public class profileFragment extends Fragment {
         buttonLogout = view.findViewById(R.id.buttonLogout);
         changePasswordButton = view.findViewById(R.id.changePasswordButton);
 
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        setUserData();
+
         buttonEditProfile.setOnClickListener(view1 -> {
             Intent intent = new Intent(requireContext(), EditProfile.class);
             startActivity(intent);
@@ -51,6 +62,12 @@ public class profileFragment extends Fragment {
             startActivity(intent);
         });
 
+        buttonLogout.setOnClickListener(view1 -> {
+            mAuth.signOut();
+            Intent intent = new Intent(requireContext(), loginScreen.class);
+            startActivity(intent);
+        });
+
         List<String> profileFoodName = Arrays.asList("Pizza", "Burger");
         List<Integer> profileFoodImage = Arrays.asList(R.drawable.pizza, R.drawable.burger);
         List<String> profileFoodPrice = Arrays.asList("100", "200");
@@ -58,6 +75,9 @@ public class profileFragment extends Fragment {
         RecentItemAdapter adapter = new RecentItemAdapter(profileFoodName, profileFoodImage, profileFoodPrice);
         profileRecycleView.setLayoutManager(new LinearLayoutManager(requireContext()));
         profileRecycleView.setAdapter(adapter);
-        return binding.getRoot();
+        return view;
+    }
+
+    private void setUserData() {
     }
 }

@@ -6,18 +6,20 @@ public class UserModel {
     private String phone;
     private String password;
     private String confirmPassword;
+    private String address;
 
     // Default constructor required for Firebase
     public UserModel() {
 
     }
 
-    public UserModel(String name, String email, String phone, String password, String confirmPassword) {
+    public UserModel(String name, String email, String phone, String password, String confirmPassword, String address) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.address = address;
     }
 
     public String getName() {
@@ -58,5 +60,11 @@ public class UserModel {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
