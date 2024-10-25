@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -24,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.ratna.hungryhive.model.UserModel;
 
 public class CheckoutActivity extends AppCompatActivity {
-    EditText editTextName, editTextAddress, editTextPhone, getEditTextAddress;
+    TextView editTextName, editTextAddress, editTextPhone, editTextEmailAddress;
     RadioButton payViaKhalti, payViaCashInDelivery;
     TextView textGrandTotalAmount;
     Button buttonConformOrder, buttonCancel;
@@ -42,7 +43,7 @@ public class CheckoutActivity extends AppCompatActivity {
         editTextName = findViewById(R.id.editTextName);
         editTextAddress = findViewById(R.id.editTextAddress);
         editTextPhone = findViewById(R.id.editTextPhone);
-        getEditTextAddress = findViewById(R.id.editTextEmailAddress);
+        editTextEmailAddress = findViewById(R.id.editTextEmailAddress);
         payViaKhalti = findViewById(R.id.payViaKhalti);
         payViaCashInDelivery = findViewById(R.id.payViaCashInDelivery);
         textGrandTotalAmount = findViewById(R.id.textGrandTotalAmount);
@@ -58,9 +59,10 @@ public class CheckoutActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         UserModel userModel = task.getResult().getValue(UserModel.class);
                         if (userModel != null) {
-                            editTextName.setText(userModel.getName());
-                            editTextPhone.setText(userModel.getPhone());
-                            getEditTextAddress.setText(userModel.getEmail());
+                            editTextName.setText("Name: " + userModel.getName());
+                            editTextPhone.setText("Phone: " + userModel.getPhone());
+                            editTextEmailAddress.setText("Email: " + userModel.getEmail());
+                            editTextAddress.setText("Address: " + userModel.getAddress());
                         }
                     }
                 }
@@ -71,9 +73,13 @@ public class CheckoutActivity extends AppCompatActivity {
         textGrandTotalAmount.setText(String.format("Rs. %.2f", grandTotalAmount));
 
         buttonConformOrder.setOnClickListener(view -> {
-            Intent intent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
-            startActivity(intent);
-            finish();
+            if (!payViaKhalti.isChecked() && !payViaCashInDelivery.isChecked()) {
+                Toast.makeText(CheckoutActivity.this, "Please select a payment method", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
         buttonCancel.setOnClickListener(view -> {

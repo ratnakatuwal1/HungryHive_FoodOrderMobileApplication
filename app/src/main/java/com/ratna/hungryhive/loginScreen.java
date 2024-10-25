@@ -33,7 +33,7 @@ public class loginScreen extends AppCompatActivity {
     EditText editTextPassword, editTextEmailAddress;
     Button buttonLogin, buttonSignupNow;
     ImageView imageButtonGoogle;
-    private String Name, Email, Phone;
+    private String Name, Email, Phone, password, confirmPassword, address;
     private ActivityResultLauncher<Intent> launcher;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
@@ -164,7 +164,7 @@ public class loginScreen extends AppCompatActivity {
         Email = firebaseUser.getEmail();
         Phone = firebaseUser.getPhoneNumber();
 
-        UserModel user = new UserModel(Name, Email, Phone, null, null);
+        UserModel user = new UserModel(Name, Email, Phone, password, confirmPassword, address);
         String userId = firebaseUser.getUid();
         databaseReference.child(userId).setValue(user);
     }

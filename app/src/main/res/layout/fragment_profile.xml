@@ -9,8 +9,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
-        android:layout_width="@dimen/_160sdp"
-        android:layout_height="@dimen/_160sdp"
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_140sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/prabesh"
@@ -63,24 +63,56 @@
         app:layout_constraintTop_toBottomOf="@+id/textEmail" />
 
     <TextView
-        android:id="@+id/textPersonalDetail"
+        android:id="@+id/textFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_3sdp"
         android:fontFamily="@font/zenantique"
-        android:text="Name: Ratna Katuwal\nE-mail: parbesh456@gmail.com\nAddress: Gothatar, Kathmandu\nPhone: 9767548680"
+        android:text="Name: Ratna Katuwal"
         android:textColor="@color/ParagraphTextColor"
         android:textSize="@dimen/_14ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPersonalInfo" />
 
     <TextView
+        android:id="@+id/textEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zenantique"
+        android:text="Email: Ratna Katuwal"
+        android:textColor="@color/ParagraphTextColor"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="@+id/textFullName"
+        app:layout_constraintTop_toBottomOf="@+id/textFullName" />
+
+    <TextView
+        android:id="@+id/textAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zenantique"
+        android:text="Address: Ratna Katuwal"
+        android:textColor="@color/ParagraphTextColor"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="@+id/textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/textEmailAddress" />
+
+    <TextView
+        android:id="@+id/textPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zenantique"
+        android:text="Phone: Ratna Katuwal"
+        android:textColor="@color/ParagraphTextColor"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="@+id/textAddress"
+        app:layout_constraintTop_toBottomOf="@+id/textAddress" />
+
+    <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
         android:fontFamily="@font/zenantique"
         android:letterSpacing=".1"
         android:text="Recent View"
@@ -88,7 +120,7 @@
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPersonalDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/textPhone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/profileRecycleView"
@@ -126,11 +158,12 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/changePasswordButton"
-        android:layout_width="@dimen/_180sdp"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/nextbutton"
         android:textColor="@color/white"
         android:text="Change Password"
+        android:layout_marginTop="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

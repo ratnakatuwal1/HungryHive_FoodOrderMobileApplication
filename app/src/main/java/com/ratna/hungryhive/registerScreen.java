@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.location.Address;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -25,9 +26,9 @@ import com.ratna.hungryhive.model.UserModel;
 
 public class registerScreen extends AppCompatActivity {
     Button buttonSignup, buttonLoginNow;
-    EditText editTextName, editTextEmailAddress, editTextPhone, editTextPassword, editTextConfirmPassword;
+    EditText editTextName, editTextEmailAddress, editTextPhone, editTextPassword, editTextConfirmPassword, editTextAddress;
 
-    private String Email, Name, Phone, Password, ConfirmPassword;
+    private String Email, Name, Phone, Password, ConfirmPassword, Address;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     boolean isPasswordVisible = false;
@@ -45,6 +46,7 @@ public class registerScreen extends AppCompatActivity {
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         buttonLoginNow = findViewById(R.id.buttonLoginNow);
         buttonSignup = findViewById(R.id.buttonSignup);
+        editTextAddress = findViewById(R.id.editTextAddress);
 
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
@@ -64,6 +66,7 @@ public class registerScreen extends AppCompatActivity {
             Email = editTextEmailAddress.getText().toString().trim();
             Password = editTextPassword.getText().toString().trim();
             ConfirmPassword = editTextConfirmPassword.getText().toString().trim();
+            Address = editTextAddress.getText().toString().trim();
 
             if (validateInputs()) {
                 createAccount(Email, Password);
@@ -99,7 +102,7 @@ public class registerScreen extends AppCompatActivity {
     }
 
     private boolean validateInputs() {
-        if (Name.isEmpty() && Email.isEmpty() && Phone.isEmpty() && Password.isEmpty() && ConfirmPassword.isEmpty()) {
+        if (Name.isEmpty() && Email.isEmpty() && Phone.isEmpty() && Password.isEmpty() && ConfirmPassword.isEmpty() && Address.isEmpty()) {
             Toast.makeText(this, "All fields are missing. Please fill in the required information.", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -149,6 +152,10 @@ public class registerScreen extends AppCompatActivity {
             return false;
         }
 
+        if (Address.isEmpty()) {
+            Toast.makeText(this, "Address field is missing. Please enter your address.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 
@@ -163,7 +170,6 @@ public class registerScreen extends AppCompatActivity {
     private boolean isValidPassword(String password) {
         return password.length() > 8;
     }
-
 
     private void createAccount(String email, String password) {
         checkIfEmailOrPhoneExists(Email, Phone, exists -> {
@@ -221,8 +227,10 @@ public class registerScreen extends AppCompatActivity {
         Email = editTextEmailAddress.getText().toString().trim();
         Password = editTextPassword.getText().toString().trim();
         ConfirmPassword = editTextConfirmPassword.getText().toString().trim();
+        Address = editTextAddress.getText().toString().trim();
 
-        UserModel user = new UserModel(Name, Email, Phone, Password, ConfirmPassword);
+
+        UserModel user = new UserModel(Name, Email, Phone, Password, ConfirmPassword, Address);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference.child(userId).setValue(user);
     }
