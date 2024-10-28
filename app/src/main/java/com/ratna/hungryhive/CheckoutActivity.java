@@ -3,7 +3,6 @@ package com.ratna.hungryhive;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,9 +10,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +19,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ratna.hungryhive.model.UserModel;
+
+import java.util.Map;
 
 public class CheckoutActivity extends AppCompatActivity {
     TextView editTextName, editTextAddress, editTextPhone, editTextEmailAddress;
@@ -56,7 +54,7 @@ public class CheckoutActivity extends AppCompatActivity {
             databaseReference.child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         UserModel userModel = task.getResult().getValue(UserModel.class);
                         if (userModel != null) {
                             editTextName.setText("Name: " + userModel.getName());
@@ -75,6 +73,9 @@ public class CheckoutActivity extends AppCompatActivity {
         buttonConformOrder.setOnClickListener(view -> {
             if (!payViaKhalti.isChecked() && !payViaCashInDelivery.isChecked()) {
                 Toast.makeText(CheckoutActivity.this, "Please select a payment method", Toast.LENGTH_SHORT).show();
+            } else if (payViaKhalti.isChecked()) {
+               //TODO khalti payment
+
             } else {
                 Intent intent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
                 startActivity(intent);
@@ -90,4 +91,5 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
     }
+
 }

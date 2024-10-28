@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation(libs.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -58,4 +59,5 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("androidx.work:work-runtime-ktx:2.9.1")
+    implementation("com.khalti:checkout-android:0.06.00")
 }
