@@ -164,7 +164,7 @@ public class loginScreen extends AppCompatActivity {
         Email = firebaseUser.getEmail();
         Phone = firebaseUser.getPhoneNumber();
 
-        UserModel user = new UserModel(Name, Email, Phone, password, confirmPassword, address);
+        UserModel user = new UserModel(Name, Email, Phone, password, confirmPassword, address, null);
         String userId = firebaseUser.getUid();
         databaseReference.child(userId).setValue(user);
     }

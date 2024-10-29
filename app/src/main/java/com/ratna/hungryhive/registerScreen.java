@@ -230,7 +230,7 @@ public class registerScreen extends AppCompatActivity {
         Address = editTextAddress.getText().toString().trim();
 
 
-        UserModel user = new UserModel(Name, Email, Phone, Password, ConfirmPassword, Address);
+        UserModel user = new UserModel(Name, Email, Phone, Password, ConfirmPassword, Address, null);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference.child(userId).setValue(user);
     }
