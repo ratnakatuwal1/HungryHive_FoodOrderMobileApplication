@@ -62,4 +62,5 @@ dependencies {
     implementation ("androidx.work:work-runtime-ktx:2.9.1")
     implementation("com.khalti:checkout-android:0.06.00")
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation ("com.itextpdf:itext7-core:7.1.15")
 }

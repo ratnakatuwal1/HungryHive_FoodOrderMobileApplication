@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -31,6 +33,7 @@ import com.ratna.hungryhive.model.UserModel;
 
 public class loginScreen extends AppCompatActivity {
     EditText editTextPassword, editTextEmailAddress;
+    TextView textForgetPassword;
     Button buttonLogin, buttonSignupNow;
     ImageView imageButtonGoogle;
     private String Name, Email, Phone, password, confirmPassword, address;
@@ -57,6 +60,36 @@ public class loginScreen extends AppCompatActivity {
         editTextEmailAddress = findViewById(R.id.editTextEmailAddress);
         editTextPassword = findViewById(R.id.editTextPassword);
         imageButtonGoogle = findViewById(R.id.imageButtonGoogle);
+        textForgetPassword = findViewById(R.id.textForgetPassword);
+
+        textForgetPassword.setOnClickListener(v -> {
+            //todo forget password code here.
+            // Show an AlertDialog to enter email for password reset
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Reset Password");
+
+            final EditText inputEmail = new EditText(this);
+            inputEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+            inputEmail.setHint("Enter your email address");
+            builder.setView(inputEmail);
+
+            builder.setPositiveButton("Send", (dialog, which) -> {
+                String email = inputEmail.getText().toString().trim();
+
+                if (email.isEmpty()) {
+                    Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show();
+                } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
+                    Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendPasswordResetEmail(email);
+                }
+            });
+
+            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+            builder.show();
+        });
+
+
 
         editTextPassword.setOnTouchListener((view, motionEvent) -> {
             int DRAWABLE_END = 2;
@@ -114,6 +147,16 @@ public class loginScreen extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void sendPasswordResetEmail(String email) {
+        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(this, "Password reset email sent. Check your inbox.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Error sending password reset email. Try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void loginUser(String email, String password){
