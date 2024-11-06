@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -63,30 +61,9 @@ public class loginScreen extends AppCompatActivity {
         textForgetPassword = findViewById(R.id.textForgetPassword);
 
         textForgetPassword.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Reset Password");
-
-            final EditText inputEmail = new EditText(this);
-            inputEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-            inputEmail.setHint("Enter your email address");
-            builder.setView(inputEmail);
-
-            builder.setPositiveButton("Send", (dialog, which) -> {
-                String email = inputEmail.getText().toString().trim();
-
-                if (email.isEmpty()) {
-                    Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show();
-                } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
-                    Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
-                } else {
-                    sendPasswordResetEmail(email);
-                }
-            });
-
-            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-            builder.show();
+            Intent intent = new Intent(loginScreen.this, forgetPassword.class);
+            startActivity(intent);
         });
-
 
 
         editTextPassword.setOnTouchListener((view, motionEvent) -> {
@@ -116,16 +93,16 @@ public class loginScreen extends AppCompatActivity {
         });
 
         buttonLogin.setOnClickListener(view -> {
-           String email = editTextEmailAddress.getText().toString().trim();
-           String password = editTextPassword.getText().toString().trim();
+            String email = editTextEmailAddress.getText().toString().trim();
+            String password = editTextPassword.getText().toString().trim();
 
-           if (email.isEmpty() || password.isEmpty()){
-               Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show();
-           } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
-               Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
-           } else {
-               loginUser(email, password);
-           }
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+            } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
+                Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
+            } else {
+                loginUser(email, password);
+            }
         });
 
         buttonSignupNow.setOnClickListener(view -> {
@@ -147,21 +124,11 @@ public class loginScreen extends AppCompatActivity {
 
     }
 
-    private void sendPasswordResetEmail(String email) {
-        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Toast.makeText(this, "Password reset email sent. Check your inbox.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Error sending password reset email. Try again.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void loginUser(String email, String password){
+    private void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = mAuth.getCurrentUser();
-                if (user != null){
+                if (user != null) {
                     Toast.makeText(loginScreen.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(loginScreen.this, homeScreen.class);
                     startActivity(intent);
