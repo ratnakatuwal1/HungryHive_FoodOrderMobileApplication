@@ -63,8 +63,6 @@ public class loginScreen extends AppCompatActivity {
         textForgetPassword = findViewById(R.id.textForgetPassword);
 
         textForgetPassword.setOnClickListener(v -> {
-            //todo forget password code here.
-            // Show an AlertDialog to enter email for password reset
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Reset Password");
 

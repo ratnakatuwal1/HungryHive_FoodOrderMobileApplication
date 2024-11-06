@@ -63,7 +63,7 @@ public class EditProfile extends AppCompatActivity {
         editTextAddress = findViewById(R.id.editTextAddress);
 
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
         
         loadUserData();
         buttonChangeProfileImage.setOnClickListener(v -> {
@@ -129,6 +129,7 @@ public class EditProfile extends AppCompatActivity {
             uploadProfileImage(userId);
         } else {
             Toast.makeText(this, "profile updated successfully", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 

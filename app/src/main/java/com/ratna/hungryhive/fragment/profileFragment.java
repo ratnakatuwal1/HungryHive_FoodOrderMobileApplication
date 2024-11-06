@@ -97,7 +97,8 @@ public class profileFragment extends Fragment {
 
         buttonEditProfile.setOnClickListener(view1 -> {
             Intent intent = new Intent(requireContext(), EditProfile.class);
-            startActivity(intent);
+//            startActivity(intent);
+            startActivityForResult(intent, 1);
         });
 
         changePasswordButton.setOnClickListener(view1 -> {
@@ -123,6 +124,13 @@ public class profileFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            setUserData();  // Refresh profile data
+        }
+    }
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         selectImageLauncher.launch(intent);
