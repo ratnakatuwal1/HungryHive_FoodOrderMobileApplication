@@ -4,6 +4,7 @@
     <color name="white">#FFFFFF</color>
 <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+    <color name="special">#000000</color>
 
 <color name="SecondaryTextColor">#757575</color>
 

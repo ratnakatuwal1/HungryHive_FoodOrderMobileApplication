@@ -5,6 +5,8 @@
     <color name="transparent">#00000000</color>
     <color name="SecondaryTextColor">#B0BEC5</color>
 
+    <color name="special">#ffffff</color>
+
     <color name="PrimaryColor">#FF6F61</color> <!-- Coral Red -->
     <color name="AccentColor">#FFD54F</color> <!-- Sunshine Yellow -->
     <color name="BackgroundColor">#1D1E22</color> <!-- Deep Charcoal -->

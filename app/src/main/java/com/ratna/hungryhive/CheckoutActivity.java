@@ -11,6 +11,8 @@ import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -88,31 +91,13 @@ public class CheckoutActivity extends AppCompatActivity {
                 Toast.makeText(CheckoutActivity.this, "Please select a payment method", Toast.LENGTH_SHORT).show();
             } else if (payViaKhalti.isChecked()) {
                 //TODO khalti payment
-
             } else {
-                if (currentUser != null) {
-                    String userId = currentUser.getUid();
-                    databaseReference.child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                UserModel userModel = task.getResult().getValue(UserModel.class);
-                                if (userModel != null) {
-                                    generateBillAsPdf(
-                                            userModel.getName(),
-                                            userModel.getPhone(),
-                                            userModel.getEmail(),
-                                            userModel.getAddress(),
-                                            grandTotalAmount
-                                    );
-                                    Intent intent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        }
-                    });
-                }
+                generateBillAsPdf();
+
+                // Navigate to Thank You activity
+                Intent thankYouIntent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
+                startActivity(thankYouIntent);
+                finish();
             }
         });
 
@@ -123,51 +108,71 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    private void generateBillAsPdf(String name, String phone, String email, String address, double totalAmount) {
-        String pdfFileName = "HungryHive_Food_Bill.pdf";
-        File pdfFile = new File(getExternalFilesDir(null), pdfFileName);
+    private void generateBillAsPdf() {
+        View billView = getLayoutInflater().inflate(R.layout.bill, null);
+        TextView billName = billView.findViewById(R.id.billName);
+        TextView billAddress = billView.findViewById(R.id.billAddress);
+        TextView billContact = billView.findViewById(R.id.billContact);
+        TextView billEmail = billView.findViewById(R.id.billEmail);
 
-        try {
-            PdfDocument pdfDocument = new PdfDocument();
-            Paint paint = new Paint();
-            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-            PdfDocument.Page page = pdfDocument.startPage(pageInfo);
-            Canvas canvas = page.getCanvas();
-            paint.setTextAlign(Paint.Align.LEFT);
-            paint.setTextSize(12f);
+        billName.setText("Name: " + editTextName.getText().toString());
+        billAddress.setText("Address: " + editTextAddress.getText().toString());
+        billContact.setText("Contact: " + editTextPhone.getText().toString());
+        billEmail.setText("Email: " + editTextEmailAddress.getText().toString());
 
-            canvas.drawText("HungryHive Food Order Bill", 80, 40, paint);
-            canvas.drawText("Name: " + name, 10, 60, paint);
-            canvas.drawText("Phone: " + phone, 10, 80, paint);
-            canvas.drawText("Email: " + email, 10, 100, paint);
-            canvas.drawText("Address: " + address, 10, 120, paint);
-            canvas.drawText("Total Amount: Rs. " + String.format("%.2f", totalAmount), 10, 160, paint);
+        TextView textGrandTotalAmount = billView.findViewById(R.id.textGrandTotalAmount);
+        textGrandTotalAmount.setText(String.format("Rs. %.2f", textGrandTotalAmount));
 
-            pdfDocument.finishPage(page);
-            pdfDocument.writeTo(new FileOutputStream(pdfFile));
-            pdfDocument.close();
+        PdfDocument pdfDocument = new PdfDocument();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(
+                billView.getMeasuredWidth(), billView.getMeasuredHeight(), 1).create();
+        PdfDocument.Page page = pdfDocument.startPage(pageInfo);
+
+        Canvas canvas = page.getCanvas();
+        billView.draw(canvas);
+        pdfDocument.finishPage(page);
+
+        File pdfFile = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "OrderBill.pdf");
+        try (FileOutputStream outputStream = new FileOutputStream(pdfFile)) {
+            pdfDocument.writeTo(outputStream);
             showDownloadNotification(pdfFile);
+            Toast.makeText(this, "Bill PDF generated successfully!", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error generating bill: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Failed to generate PDF", Toast.LENGTH_SHORT).show();
+        } finally {
+            pdfDocument.close();
         }
+
     }
 
     private void showDownloadNotification(File pdfFile) {
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        String channelId = "bill_download_channel";
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("orderChannel", "Order Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    "Bill Download", NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "orderChannel").setSmallIcon(R.drawable.logo_2).setContentTitle("Order Successful").setContentText("your order have been placed and bill download successfully").setAutoCancel(true);
-
+        Uri pdfUri = FileProvider.getUriForFile(this, getPackageName() + ".provider", pdfFile);
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(pdfFile), "application/pdf");
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
-        builder.setContentIntent(pendingIntent);
+        intent.setDataAndType(pdfUri, "application/pdf");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.logo_2)
+                .setContentTitle("Order Successful")
+                .setContentText("Your order has been placed and bill download successfully")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
 
         notificationManager.notify(1, builder.build());
+
     }
 
 }
