@@ -7,14 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,13 +34,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.ratna.hungryhive.model.CartItem;
 import com.ratna.hungryhive.model.UserModel;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -45,6 +55,7 @@ public class CheckoutActivity extends AppCompatActivity {
     Button buttonConformOrder, buttonCancel;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
+    private List<CartItem> cartItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +92,25 @@ public class CheckoutActivity extends AppCompatActivity {
                     }
                 }
             });
+
+            databaseReference.child(userId).child("CartItem").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    cartItems = new ArrayList<>();
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        CartItem cartItem = snapshot.getValue(CartItem.class);
+                        if (cartItem != null) {
+                            cartItems.add(cartItem);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(CheckoutActivity.this, "Failed to load cart items.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         double grandTotalAmount = getIntent().getDoubleExtra("grandTotalAmount", 0.0);
@@ -108,30 +138,60 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
+
     private void generateBillAsPdf() {
+
         View billView = getLayoutInflater().inflate(R.layout.bill, null);
+
+        // Populate billView with data
         TextView billName = billView.findViewById(R.id.billName);
         TextView billAddress = billView.findViewById(R.id.billAddress);
         TextView billContact = billView.findViewById(R.id.billContact);
         TextView billEmail = billView.findViewById(R.id.billEmail);
+       // TextView billTotalAmount = billView.findViewById(R.id.textGrandTotalAmount);
 
-        billName.setText("Name: " + editTextName.getText().toString());
-        billAddress.setText("Address: " + editTextAddress.getText().toString());
-        billContact.setText("Contact: " + editTextPhone.getText().toString());
-        billEmail.setText("Email: " + editTextEmailAddress.getText().toString());
+        // Setting the text with user input and grand total
+        billName.setText(editTextName.getText().toString());
+        billAddress.setText(editTextAddress.getText().toString());
+        billContact.setText(editTextPhone.getText().toString());
+        billEmail.setText(editTextEmailAddress.getText().toString());
 
-        TextView textGrandTotalAmount = billView.findViewById(R.id.textGrandTotalAmount);
-        textGrandTotalAmount.setText(String.format("Rs. %.2f", textGrandTotalAmount));
+        LinearLayout orderedItemsContainer = billView.findViewById(R.id.orderedItemsContainer);
+
+        for (CartItem item : cartItems) {
+            String itemText = String.format("%s x%d - Rs. %.2f", item.getFoodName(), item.getFoodQuantity(),
+                    Double.parseDouble(item.getFoodPrice()) * item.getFoodQuantity());
+            TextView itemTextView = new TextView(this);
+            itemTextView.setText(itemText);
+            itemTextView.setTextSize(14);
+            itemTextView.setTextColor(getResources().getColor(R.color.SecondaryTextColor));
+            orderedItemsContainer.addView(itemTextView);
+        }
+
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        int screenHeight = getResources().getDisplayMetrics().heightPixels;
 
         PdfDocument pdfDocument = new PdfDocument();
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(
-                billView.getMeasuredWidth(), billView.getMeasuredHeight(), 1).create();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(screenWidth, screenHeight, 1).create();
         PdfDocument.Page page = pdfDocument.startPage(pageInfo);
 
+//        billTotalAmount.setText(String.format("Rs. %.2f", Double.parseDouble(textGrandTotalAmount.getText().toString().replace("Rs. ", ""))));
+
+        // Measure and layout the view before creating PDF
+        billView.measure(View.MeasureSpec.makeMeasureSpec(screenWidth, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(screenHeight, View.MeasureSpec.UNSPECIFIED));
+        billView.layout(0, 0, screenWidth, billView.getMeasuredHeight());
+
+
+        // Create PDF document
+
+
+        // Draw the view content onto the PDF canvas
         Canvas canvas = page.getCanvas();
         billView.draw(canvas);
         pdfDocument.finishPage(page);
 
+        // Save the document to a file
         File pdfFile = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "OrderBill.pdf");
         try (FileOutputStream outputStream = new FileOutputStream(pdfFile)) {
             pdfDocument.writeTo(outputStream);

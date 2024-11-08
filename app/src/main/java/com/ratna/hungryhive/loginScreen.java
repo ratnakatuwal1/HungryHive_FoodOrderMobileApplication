@@ -157,13 +157,28 @@ public class loginScreen extends AppCompatActivity {
         });
     }
 
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if (mAuth.getCurrentUser() != null) {
+//            Intent intent = new Intent(loginScreen.this, homeScreen.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
+
+
     @Override
     protected void onStart() {
         super.onStart();
-        if (mAuth.getCurrentUser() != null) {
+
+        // Check if the user is already logged in
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            // If user is logged in, navigate to homeScreen
             Intent intent = new Intent(loginScreen.this, homeScreen.class);
             startActivity(intent);
-            finish();
+            finish(); // Close the login screen
         }
     }
 

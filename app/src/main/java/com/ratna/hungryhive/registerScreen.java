@@ -179,11 +179,10 @@ public class registerScreen extends AppCompatActivity {
                 // Create the user if the email or phone is not in use
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(registerScreen.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                         saveUserData();
+                        Toast.makeText(registerScreen.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(registerScreen.this, loginScreen.class);
                         startActivity(intent);
-                        finish();
                     } else {
                         Toast.makeText(registerScreen.this, "Account Creation Failed", Toast.LENGTH_SHORT).show();
                     }

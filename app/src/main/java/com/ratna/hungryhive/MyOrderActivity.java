@@ -75,6 +75,7 @@ public class MyOrderActivity extends AppCompatActivity {
         checkoutButton.setOnClickListener(view -> {
             Intent intent = new Intent(MyOrderActivity.this, CheckoutActivity.class);
             intent.putExtra("grandTotalAmount", grandTotalAmount);
+
             startActivity(intent);
         });
     }
