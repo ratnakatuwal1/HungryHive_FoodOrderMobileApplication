@@ -28,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,8 +45,11 @@ import com.ratna.hungryhive.model.UserModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -148,7 +152,12 @@ public class CheckoutActivity extends AppCompatActivity {
         TextView billAddress = billView.findViewById(R.id.billAddress);
         TextView billContact = billView.findViewById(R.id.billContact);
         TextView billEmail = billView.findViewById(R.id.billEmail);
-       // TextView billTotalAmount = billView.findViewById(R.id.textGrandTotalAmount);
+        TextView billDate = billView.findViewById(R.id.billDate);
+
+        String currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+        billDate.setText("Billing Date: " + currentDate);
+
+        // TextView billTotalAmount = billView.findViewById(R.id.textGrandTotalAmount);
 
         // Setting the text with user input and grand total
         billName.setText(editTextName.getText().toString());
@@ -163,10 +172,20 @@ public class CheckoutActivity extends AppCompatActivity {
                     Double.parseDouble(item.getFoodPrice()) * item.getFoodQuantity());
             TextView itemTextView = new TextView(this);
             itemTextView.setText(itemText);
-            itemTextView.setTextSize(14);
             itemTextView.setTextColor(getResources().getColor(R.color.SecondaryTextColor));
+            itemTextView.setTextSize(getResources().getDimension(R.dimen._10ssp));
+            itemTextView.setTextColor(getResources().getColor(R.color.SecondaryTextColor));
+            Typeface zenAntiqueTypeface = ResourcesCompat.getFont(this, R.font.zenantique);
+            itemTextView.setTypeface(zenAntiqueTypeface);
             orderedItemsContainer.addView(itemTextView);
         }
+
+        TextView grandTotalTextView = new TextView(this);
+        grandTotalTextView.setText(String.format("Grand Total: Rs. %.2f", Double.parseDouble(textGrandTotalAmount.getText().toString().replace("Rs. ", ""))));
+        grandTotalTextView.setTextSize(getResources().getDimension(R.dimen._10ssp));
+        grandTotalTextView.setTextColor(getResources().getColor(R.color.SecondaryTextColor));
+        grandTotalTextView.setTypeface(Typeface.DEFAULT_BOLD);  // Make it bold for emphasis
+        orderedItemsContainer.addView(grandTotalTextView);
 
         int screenWidth = getResources().getDisplayMetrics().widthPixels;
         int screenHeight = getResources().getDisplayMetrics().heightPixels;
@@ -179,8 +198,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
         // Measure and layout the view before creating PDF
         billView.measure(View.MeasureSpec.makeMeasureSpec(screenWidth, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(screenHeight, View.MeasureSpec.UNSPECIFIED));
-        billView.layout(0, 0, screenWidth, billView.getMeasuredHeight());
+                View.MeasureSpec.makeMeasureSpec(screenHeight, View.MeasureSpec.EXACTLY));
+        billView.layout(0, 0, billView.getMeasuredWidth(), billView.getMeasuredHeight());
+        //billView.layout(0, 0, screenWidth, billView.getMeasuredHeight());
 
 
         // Create PDF document

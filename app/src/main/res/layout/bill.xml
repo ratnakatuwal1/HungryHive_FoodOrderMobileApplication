@@ -204,6 +204,7 @@
         android:textColor="@color/HeadingTextColor"
         android:fontFamily="@font/orbitron"
         android:textSize="@dimen/_20ssp"
+        android:letterSpacing=".1"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -64,10 +64,14 @@ public class cartFragment extends Fragment {
 
         Button buttonProceed = view.findViewById(R.id.buttonProceed);
         buttonProceed.setOnClickListener(v -> {
-            Gson gson = new Gson();
-            String cartItemsJson = gson.toJson(cartItems);
+            if (cartItems.isEmpty()){
+                Toast.makeText(requireContext(), "Cart is empty. Add item to proceed!", Toast.LENGTH_SHORT).show();
+            } else {
+                Gson gson = new Gson();
+                String cartItemsJson = gson.toJson(cartItems);
 //            Log.d("CartFragment", "Cart Items JSON: " + cartItemsJson);
-            getOrderItemDetails(cartItemsJson);
+                getOrderItemDetails(cartItemsJson);
+            }
         });
         retrieveCartItems();
         return view;
