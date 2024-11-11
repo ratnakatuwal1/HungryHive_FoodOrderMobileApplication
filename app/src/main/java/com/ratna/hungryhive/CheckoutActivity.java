@@ -82,8 +82,11 @@ public class CheckoutActivity extends AppCompatActivity {
         buttonCancel = findViewById(R.id.buttonCancel);
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+
+       // FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            String userId = currentUser.getUid();
+            userId = currentUser.getUid();
             databaseReference.child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -154,7 +157,9 @@ placeOrder();
         String phoneNumber = editTextPhone.getText().toString();
         String totalPrices = textGrandTotalAmount.getText().toString();
         Long currentTime = System.currentTimeMillis();
-        String itemPushKey = databaseReference.child("OrderDetails").push().getKey();
+
+        DatabaseReference orderDetailsReference = FirebaseDatabase.getInstance().getReference().child("OrderDetails");
+        String itemPushKey = orderDetailsReference.push().getKey();
 
         // Create lists for food names, prices, and quantities
         List<String> foodNames = new ArrayList<>();
@@ -184,20 +189,25 @@ placeOrder();
         );
 
         // Push the order to the database
-        databaseReference.child("OrderDetails").child(itemPushKey).setValue(orderDetails)
+        orderDetailsReference.child(itemPushKey).setValue(orderDetails)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show();
-                        removeItemFromCart();
+
                     } else {
                         Toast.makeText(this, "Failed to place order.", Toast.LENGTH_SHORT).show();
                     }
                 });
+        removeItemFromCart();
     }
 
     public void removeItemFromCart(){
-        DatabaseReference cartRef = databaseReference.child("users").child(userId).child("CartItem");
-        cartRef.removeValue();
+        if (userId != null) {  // Ensure userId is not null
+            DatabaseReference cartRef = databaseReference.child(userId).child("CartItem");
+            cartRef.removeValue();
+        } else {
+            Toast.makeText(this, "User not identified.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
