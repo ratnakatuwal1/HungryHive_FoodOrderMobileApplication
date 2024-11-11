@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ratna.hungryhive.model.CartItem;
+import com.ratna.hungryhive.model.OrderDetails;
 import com.ratna.hungryhive.model.UserModel;
 
 import java.io.File;
@@ -58,6 +59,7 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView textGrandTotalAmount;
     Button buttonConformOrder, buttonCancel;
     private FirebaseAuth mAuth;
+    private String userId;
     private DatabaseReference databaseReference;
     private List<CartItem> cartItems;
 
@@ -128,6 +130,8 @@ public class CheckoutActivity extends AppCompatActivity {
             } else {
                 generateBillAsPdf();
 
+placeOrder();
+
                 // Navigate to Thank You activity
                 Intent thankYouIntent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
                 startActivity(thankYouIntent);
@@ -140,6 +144,60 @@ public class CheckoutActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    private void placeOrder() {
+        // Retrieve user and order details
+        String userUid = mAuth.getCurrentUser().getUid();
+        String userName = editTextName.getText().toString();
+        String address = editTextAddress.getText().toString();
+        String phoneNumber = editTextPhone.getText().toString();
+        String totalPrices = textGrandTotalAmount.getText().toString();
+        Long currentTime = System.currentTimeMillis();
+        String itemPushKey = databaseReference.child("OrderDetails").push().getKey();
+
+        // Create lists for food names, prices, and quantities
+        List<String> foodNames = new ArrayList<>();
+        List<String> foodPrices = new ArrayList<>();
+        List<String> foodQuantities = new ArrayList<>();
+
+        for (CartItem item : cartItems) {
+            foodNames.add(item.getFoodName());
+            foodPrices.add(String.valueOf(item.getFoodPrice()));
+            foodQuantities.add(String.valueOf(item.getFoodQuantity()));
+        }
+
+        // Create the OrderDetails object
+        OrderDetails orderDetails = new OrderDetails(
+                userUid,
+                userName,
+                foodNames,
+                foodPrices,
+                foodQuantities,
+                address,
+                totalPrices,
+                phoneNumber,
+                false,  // orderAccepted
+                false,  // paymentReceived
+                itemPushKey,
+                currentTime
+        );
+
+        // Push the order to the database
+        databaseReference.child("OrderDetails").child(itemPushKey).setValue(orderDetails)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show();
+                        removeItemFromCart();
+                    } else {
+                        Toast.makeText(this, "Failed to place order.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void removeItemFromCart(){
+        DatabaseReference cartRef = databaseReference.child("users").child(userId).child("CartItem");
+        cartRef.removeValue();
     }
 
 

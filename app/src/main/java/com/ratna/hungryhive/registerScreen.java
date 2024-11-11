@@ -227,9 +227,10 @@ public class registerScreen extends AppCompatActivity {
         Password = editTextPassword.getText().toString().trim();
         ConfirmPassword = editTextConfirmPassword.getText().toString().trim();
         Address = editTextAddress.getText().toString().trim();
+        String role = "user";
 
 
-        UserModel user = new UserModel(Name, Email, Phone, Password, ConfirmPassword, Address, null);
+        UserModel user = new UserModel(Name, Email, Phone, Password, ConfirmPassword, Address, null, role);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference.child(userId).setValue(user);
     }

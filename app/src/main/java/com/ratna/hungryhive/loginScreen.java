@@ -129,10 +129,24 @@ public class loginScreen extends AppCompatActivity {
             if (task.isSuccessful()) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null) {
-                    Toast.makeText(loginScreen.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(loginScreen.this, homeScreen.class);
-                    startActivity(intent);
-                    finish();
+                    String userId = user.getUid();
+                    // Retrieve the user role from Firebase Database
+                    databaseReference.child(userId).get().addOnCompleteListener(dbTask -> {
+                        if (dbTask.isSuccessful()) {
+                            String role = dbTask.getResult().child("role").getValue(String.class);
+                            if ("user".equals(role)) {
+                                Toast.makeText(loginScreen.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(loginScreen.this, homeScreen.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(loginScreen.this, "Access Denied: Admin credentials detected.", Toast.LENGTH_SHORT).show();
+                                mAuth.signOut(); // Log out the admin user from the user app
+                            }
+                        } else {
+                            Toast.makeText(loginScreen.this, "Failed to verify user role", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             } else {
                 Toast.makeText(loginScreen.this, "Login Failed", Toast.LENGTH_SHORT).show();
@@ -144,6 +158,7 @@ public class loginScreen extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
+                String userId = mAuth.getCurrentUser().getUid();
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null) {
                     saveUserDataGoogle(user);
@@ -156,16 +171,6 @@ public class loginScreen extends AppCompatActivity {
             }
         });
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if (mAuth.getCurrentUser() != null) {
-//            Intent intent = new Intent(loginScreen.this, homeScreen.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
 
 
     @Override
@@ -187,7 +192,9 @@ public class loginScreen extends AppCompatActivity {
         Email = firebaseUser.getEmail();
         Phone = firebaseUser.getPhoneNumber();
 
-        UserModel user = new UserModel(Name, Email, Phone, password, confirmPassword, address, null);
+        String role = "user";
+
+        UserModel user = new UserModel(Name, Email, Phone, password, confirmPassword, address, null, role);
         String userId = firebaseUser.getUid();
         databaseReference.child(userId).setValue(user);
     }
