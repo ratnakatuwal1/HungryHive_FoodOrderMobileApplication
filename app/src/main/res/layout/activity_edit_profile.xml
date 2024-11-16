@@ -36,8 +36,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonChangeProfileImage"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/nextbutton"
         android:textColor="@color/white"
@@ -121,8 +121,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSaveChanges"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_40sdp"
         android:fontFamily="@font/zenantique"
         android:textColor="@color/white"
