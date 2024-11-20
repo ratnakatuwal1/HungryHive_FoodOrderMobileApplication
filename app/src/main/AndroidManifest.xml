@@ -64,15 +64,6 @@
             android:name=".loginHome"
             android:exported="false" />
         <activity
-            android:name=".welComeScreen"
-            android:exported="false" />
-        <activity
-            android:name=".fastDelivery"
-            android:exported="false" />
-        <activity
-            android:name=".findFood"
-            android:exported="false" />
-        <activity
             android:name=".splashScreen"
             android:exported="true">
             <intent-filter>

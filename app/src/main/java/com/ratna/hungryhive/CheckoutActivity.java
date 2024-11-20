@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -55,7 +57,7 @@ import java.util.Map;
 
 public class CheckoutActivity extends AppCompatActivity {
     TextView editTextName, editTextAddress, editTextPhone, editTextEmailAddress;
-    RadioButton payViaKhalti, payViaCashInDelivery;
+    RadioButton payViaCashInDelivery;
     TextView textGrandTotalAmount;
     Button buttonConformOrder, buttonCancel;
     private FirebaseAuth mAuth;
@@ -75,7 +77,6 @@ public class CheckoutActivity extends AppCompatActivity {
         editTextAddress = findViewById(R.id.editTextAddress);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextEmailAddress = findViewById(R.id.editTextEmailAddress);
-        payViaKhalti = findViewById(R.id.payViaKhalti);
         payViaCashInDelivery = findViewById(R.id.payViaCashInDelivery);
         textGrandTotalAmount = findViewById(R.id.textGrandTotalAmount);
         buttonConformOrder = findViewById(R.id.buttonConfirmOrder);
@@ -84,7 +85,7 @@ public class CheckoutActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
-       // FirebaseUser currentUser = mAuth.getCurrentUser();
+        // FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             userId = currentUser.getUid();
             databaseReference.child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -126,14 +127,12 @@ public class CheckoutActivity extends AppCompatActivity {
         textGrandTotalAmount.setText(String.format("Rs. %.2f", grandTotalAmount));
 
         buttonConformOrder.setOnClickListener(view -> {
-            if (!payViaKhalti.isChecked() && !payViaCashInDelivery.isChecked()) {
+            if (!payViaCashInDelivery.isChecked()) {
                 Toast.makeText(CheckoutActivity.this, "Please select a payment method", Toast.LENGTH_SHORT).show();
-            } else if (payViaKhalti.isChecked()) {
-                //TODO khalti payment
-            } else {
+            }  else {
                 generateBillAsPdf();
 
-placeOrder();
+                placeOrder();
 
                 // Navigate to Thank You activity
                 Intent thankYouIntent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
@@ -149,10 +148,18 @@ placeOrder();
         });
     }
 
+    private void navigateToThankYouActivity() {
+        Intent thankYouIntent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
+        startActivity(thankYouIntent);
+        finish();
+    }
+
+
     private void placeOrder() {
         // Retrieve user and order details
         String userUid = mAuth.getCurrentUser().getUid();
         String userName = editTextName.getText().toString();
+        String emailAddress = editTextEmailAddress.getText().toString();
         String address = editTextAddress.getText().toString();
         String phoneNumber = editTextPhone.getText().toString();
         String totalPrices = textGrandTotalAmount.getText().toString();
@@ -165,18 +172,23 @@ placeOrder();
         List<String> foodNames = new ArrayList<>();
         List<String> foodPrices = new ArrayList<>();
         List<String> foodQuantities = new ArrayList<>();
+        List<String> foodImages = new ArrayList<>();
 
         for (CartItem item : cartItems) {
             foodNames.add(item.getFoodName());
-            foodPrices.add(String.valueOf(item.getFoodPrice()));
+            foodImages.add(item.getFoodImage());  // Ensure image URL goes here
+            foodPrices.add(String.valueOf(item.getFoodPrice()));  // Ensure price goes here
             foodQuantities.add(String.valueOf(item.getFoodQuantity()));
+            Log.d("CheckoutActivity", "Adding food item quantity: " + item.getFoodName() + " - Quantity: " + item.getFoodQuantity());
         }
 
         // Create the OrderDetails object
         OrderDetails orderDetails = new OrderDetails(
                 userUid,
                 userName,
+                emailAddress,
                 foodNames,
+                foodImages,
                 foodPrices,
                 foodQuantities,
                 address,
@@ -201,7 +213,7 @@ placeOrder();
         removeItemFromCart();
     }
 
-    public void removeItemFromCart(){
+    public void removeItemFromCart() {
         if (userId != null) {  // Ensure userId is not null
             DatabaseReference cartRef = databaseReference.child(userId).child("CartItem");
             cartRef.removeValue();

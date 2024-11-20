@@ -5,7 +5,9 @@ import java.util.List;
 public class OrderDetails {
     String userUid = null;
     String userName;
+    String email;
     List<String> foodNames;
+    List<String> foodImages;
     List<String> foodPrices;
     List<String> foodQuantities;
     String address;
@@ -20,10 +22,12 @@ public class OrderDetails {
 
     }
 
-    public OrderDetails(String userUid, String userName, List<String> foodNames, List<String> foodPrices, List<String> foodQuantities, String address, String totalPrices, String phoneNumber, Boolean orderAccepted, Boolean paymentReceived, String itemPushKey, Long currentTime) {
+    public OrderDetails(String userUid, String userName, String email, List<String> foodNames, List<String> foodImages, List<String> foodPrices, List<String> foodQuantities, String address, String totalPrices, String phoneNumber, Boolean orderAccepted, Boolean paymentReceived, String itemPushKey, Long currentTime) {
         this.userUid = userUid;
         this.userName = userName;
+        this.email = email;
         this.foodNames = foodNames;
+        this.foodImages = foodImages;
         this.foodPrices = foodPrices;
         this.foodQuantities = foodQuantities;
         this.address = address;
@@ -57,6 +61,12 @@ public class OrderDetails {
 
     public void setFoodNames(List<String> foodNames) {
         this.foodNames = foodNames;
+    }
+    public List<String> getFoodImages() {
+        return foodImages;
+    }
+    public void setFoodImages(List<String> foodImages) {
+        this.foodImages = foodImages;
     }
 
     public List<String> getFoodPrices() {
