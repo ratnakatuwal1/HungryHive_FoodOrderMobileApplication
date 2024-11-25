@@ -6,9 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -102,23 +105,35 @@ public class searchFragment extends Fragment {
     }
 
     private void setupSearchView() {
-        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        // Convert SearchView's input into an EditText to attach a TextWatcher
+        int searchEditTextId = binding.searchView.getContext().getResources()
+                .getIdentifier("android:id/search_src_text", null, null);
+        EditText searchEditText = binding.searchView.findViewById(searchEditTextId);
+
+        // Add TextWatcher to filter items dynamically
+        searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                filterMenuItems(s);
-                return false;
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                // No action needed
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                filterMenuItems(s);
-                return true;
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                // Filter items dynamically as the user types
+                filterMenuItems(charSequence.toString());
+            }
+
+            public void afterTextChanged(Editable editable) {
+                // No action needed
             }
         });
     }
 
+
     private void filterMenuItems(String query) {
         filteredMenuItems.clear();
+
+        //Linear Search Algorithm
         for (MenuItem item : menuItems) {
             if (item.getFoodName().toLowerCase().contains(query.toLowerCase())) {
                 filteredMenuItems.add(item);

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <!-- Food Image -->
+    <ImageView
+        android:id="@+id/imageViewYouMayLike"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="foodImage" />
+
+    <!-- Food Name -->
+    <TextView
+        android:id="@+id/textViewYouMayLikeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        tools:text="Chicken Burger" />
+
+    <!-- Food Description -->
+    <TextView
+        android:id="@+id/textViewYouMayLikeDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:textSize="14sp"
+        android:textColor="@color/ParagraphTextColor"
+        tools:text="Juicy grilled chicken patty with fresh veggies." />
+
+    <!-- Price -->
+    <TextView
+        android:id="@+id/textViewYouMayLikePrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/ParagraphTextColor"
+        tools:text="Price: Rs.250" />
+
+    <!-- Button Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <!-- View Details Button -->
+        <Button
+            android:id="@+id/buttonViewDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="View Details"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white" />
+
+        <!-- Cancel Button -->
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</LinearLayout>

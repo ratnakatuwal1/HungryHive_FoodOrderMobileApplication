@@ -84,19 +84,6 @@ public class cartFragment extends Fragment {
         intent.putExtra("cartItems", cartItemsJson);
         startActivity(intent);
     }
-//    private void orderNow(List<String> foodNames, List<String> foodPrices, List<String> foodImages, List<String> foodDescriptions, List<String> foodIngredients, int foodQuantities) {
-//        if (isAdded() && getContext() != null){
-//            Intent intent = new Intent(requireContext(), MyOrderActivity.class);
-//            intent.putExtra("foodNames", (ArrayList<String>) foodNames);
-//            intent.putExtra("foodPrices", (ArrayList<String>) foodPrices);
-//            intent.putExtra("foodImages", (ArrayList<String>) foodImages);
-//            intent.putExtra("foodDescriptions", (ArrayList<String>) foodDescriptions);
-//            intent.putExtra("foodIngredients", (ArrayList<String>) foodIngredients);
-//            intent.putExtra("foodQuantities", foodQuantities);
-//            startActivity(intent);
-//
-//        }
-//    }
 
     private void retrieveCartItems() {
         databaseReference.addValueEventListener(new ValueEventListener() {

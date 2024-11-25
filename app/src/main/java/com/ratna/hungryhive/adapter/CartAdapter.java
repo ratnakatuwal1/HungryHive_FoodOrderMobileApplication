@@ -30,16 +30,6 @@ import java.util.List;
 
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-    //    private int[] itemQuantity;
-//    private List<String> cartItems;
-//    private List<String> cartPrices;
-//    private List<Integer> cartImages;
-//    private List<String> cartDescriptions;
-//    private List<String> cartIngredients;
-//    private List<Integer> cartQuantities;
-//    private Context context;
-//    private FirebaseAuth mAuth;
-//    private String userId;
     private List<CartItem> cartItems;
     private Context context;
     private FirebaseAuth mAuth;
@@ -47,19 +37,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private String userId;
 
     public CartAdapter(Context context, List<CartItem> cartItems) {
-//        this.cartItems = new ArrayList<>(cartItems);
-//        this.cartPrices = new ArrayList<>(cartPrices);
-//        this.cartImages = new ArrayList<>(cartImages);
-//        this.itemQuantity = new int[cartItems.size()];
         this.context = context;
         this.cartItems = cartItems;
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("CartItem");
-
-//        mAuth = FirebaseAuth.getInstance();
-//        userId = mAuth.getCurrentUser().getUid();
-//        Arrays.fill(itemQuantity, 1);
     }
 
 
@@ -104,9 +86,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             binding.textFoodName.setText(cartItem.getFoodName());
             binding.textFoodAmount.setText(cartItem.getFoodPrice());
             binding.textQty.setText(String.valueOf(cartItem.getFoodQuantity()));
-//            Glide.with(context)
-//                    .load(cartItem.getFoodImage())  // Assuming 'foodDescription' holds the image URL
-//                    .into(binding.imageCartFood);
+
             Glide.with(context)
                     .load(cartItem.getFoodImage())  // Ensure the image URL is valid
                     .placeholder(R.drawable.burger)  // Add a placeholder
