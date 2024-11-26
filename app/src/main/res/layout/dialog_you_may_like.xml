@@ -9,6 +9,20 @@
     android:background="@color/BackgroundColor"
     android:layout_gravity="center">
 
+    <!-- "You May Also Like" Title -->
+    <TextView
+        android:id="@+id/textViewYouMayAlsoLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You may also like"
+        android:textSize="24sp"
+        android:letterSpacing=".1"
+        android:textStyle="bold"
+        android:fontFamily="@font/orbitron"
+        android:textColor="@color/HeadingTextColor"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center" />
+
     <!-- Food Image -->
     <ImageView
         android:id="@+id/imageViewYouMayLike"
@@ -26,9 +40,10 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:fontFamily="@font/zenantique"
         android:textColor="@color/HeadingTextColor"
         android:layout_marginBottom="8dp"
-        android:text="Chicken Burger"
+        android:text=""
         android:layout_gravity="center"/>
 
     <!-- Food Description -->
@@ -38,8 +53,9 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@color/SecondaryTextColor"
+        android:fontFamily="@font/zenantique"
         android:layout_marginBottom="12dp"
-        android:text="Juicy grilled chicken patty with fresh veggies."
+        android:text=""
         android:layout_gravity="center"/>
 
     <!-- Price -->
@@ -49,9 +65,10 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="@font/zenantique"
         android:textColor="@color/PrimaryColor"
         android:layout_marginBottom="16dp"
-        android:text="Price: Rs. 250"
+        android:text=""
         android:layout_gravity="center"/>
 
     <!-- Button Container -->
@@ -68,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/zenantique"
             android:text="View Details"
             android:backgroundTint="@color/PrimaryColor"
             android:textColor="@android:color/white"
@@ -80,6 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
+            android:fontFamily="@font/zenantique"
             android:backgroundTint="@color/AccentColor"
             android:textColor="@android:color/white"
             android:padding="12dp"
@@ -92,6 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add to Cart"
+            android:fontFamily="@font/zenantique"
             android:backgroundTint="@color/PrimaryColor"
             android:textColor="@android:color/white"
             android:padding="12dp"
