@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="16dp"
-    android:orientation="vertical">
+    android:background="@color/BackgroundColor"
+    android:layout_gravity="center">
 
     <!-- Food Image -->
     <ImageView
@@ -14,46 +16,51 @@
         android:layout_height="200dp"
         android:layout_marginBottom="16dp"
         android:scaleType="centerCrop"
-        android:contentDescription="foodImage" />
+        android:contentDescription="foodImage"
+        android:layout_gravity="center" />
 
     <!-- Food Name -->
     <TextView
         android:id="@+id/textViewYouMayLikeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        tools:text="Chicken Burger" />
+        android:textColor="@color/HeadingTextColor"
+        android:layout_marginBottom="8dp"
+        android:text="Chicken Burger"
+        android:layout_gravity="center"/>
 
     <!-- Food Description -->
     <TextView
         android:id="@+id/textViewYouMayLikeDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/SecondaryTextColor"
         android:layout_marginBottom="12dp"
-        android:textSize="14sp"
-        android:textColor="@color/ParagraphTextColor"
-        tools:text="Juicy grilled chicken patty with fresh veggies." />
+        android:text="Juicy grilled chicken patty with fresh veggies."
+        android:layout_gravity="center"/>
 
     <!-- Price -->
     <TextView
         android:id="@+id/textViewYouMayLikePrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/ParagraphTextColor"
-        tools:text="Price: Rs.250" />
+        android:textColor="@color/PrimaryColor"
+        android:layout_marginBottom="16dp"
+        android:text="Price: Rs. 250"
+        android:layout_gravity="center"/>
 
     <!-- Button Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
 
         <!-- View Details Button -->
         <Button
@@ -62,8 +69,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="View Details"
-            android:backgroundTint="@color/black"
-            android:textColor="@android:color/white" />
+            android:backgroundTint="@color/PrimaryColor"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:textSize="16sp"/>
 
         <!-- Cancel Button -->
         <Button
@@ -71,7 +80,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
-            android:backgroundTint="@color/black"
-            android:textColor="@android:color/white" />
+            android:backgroundTint="@color/AccentColor"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Add to Cart Button -->
+        <Button
+            android:id="@+id/buttonAddToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart"
+            android:backgroundTint="@color/PrimaryColor"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:textSize="16sp"/>
     </LinearLayout>
+
 </LinearLayout>

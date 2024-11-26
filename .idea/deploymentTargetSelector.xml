@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-11-11T15:36:10.850706Z">
+        <DropdownSelection timestamp="2024-11-26T06:50:27.552635800Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\DELL\.android\avd\RatnaGalaxyA50.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=RZ8MB21Z92J" />
             </handle>
           </Target>
         </DropdownSelection>

@@ -2,6 +2,8 @@ package com.ratna.hungryhive;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -27,11 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FoodDescriptionActivity extends AppCompatActivity {
-    private String foodName;
-    private String foodDescription;
-    private String foodImage;
-    private String foodPrice;
-    private String foodIngredients;
+    private String foodName, foodDescription, foodImage, foodPrice, foodIngredients;
     private Button buttonAddToCart;
     private FirebaseAuth mAuth;
 
@@ -82,9 +81,9 @@ public class FoodDescriptionActivity extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 Toast.makeText(FoodDescriptionActivity.this, "Item added into cart successfully!", Toast.LENGTH_SHORT).show();
                 fetchSimilarItems(foodName);
-                Intent intent = new Intent(FoodDescriptionActivity.this, homeScreen.class);
-                startActivity(intent);
-                finish();
+                //Intent intent = new Intent(FoodDescriptionActivity.this, homeScreen.class);
+              //  startActivity(intent);
+                //finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -92,82 +91,77 @@ public class FoodDescriptionActivity extends AppCompatActivity {
                 Toast.makeText(FoodDescriptionActivity.this, "Failed to add item to cart", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
-    private void fetchSimilarItems(String foodNames) {
+    private void fetchSimilarItems(String foodName) {
         DatabaseReference menuRef = FirebaseDatabase.getInstance().getReference("Menu");
 
         menuRef.get().addOnSuccessListener(dataSnapshot -> {
-            if (dataSnapshot.exists()) {
-                Map <String, String> selectedFood = null;
-
-                    for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
-                        String itemFoodName = itemSnapshot.child("foodName").getValue(String.class);
-                        if (foodNames.equals(itemFoodName)) {
-                            selectedFood = new HashMap<>();
-                            selectedFood.put("Description", itemSnapshot.child("foodDescription").getValue(String.class));
-                            selectedFood.put("Ingredients", itemSnapshot.child("foodIngredients").getValue(String.class));
-                            break;
-                        }
-                    }
-
-                if (selectedFood != null) {
-                    List<Map<String, String>> similarItems = new ArrayList<>();
-
-                    // Find items with similar descriptions or ingredients
-                    for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
-                        String foodName = itemSnapshot.child("foodName").getValue(String.class);
-
-                        if (!foodNames.equals(foodName)) {
-                            String description = itemSnapshot.child("foodDescription").getValue(String.class);
-                            String ingredients = itemSnapshot.child("foodIngredients").getValue(String.class);
-
-                            if (isSimilar(selectedFood.get("Description"), description) ||
-                                    isSimilar(selectedFood.get("Ingredients"), ingredients)) {
-                                Map<String, String> item = new HashMap<>();
-                                item.put("name", foodName);
-                                item.put("description", description);
-                                item.put("image", itemSnapshot.child("foodImage").getValue(String.class));
-                                item.put("price", itemSnapshot.child("foodPrice").getValue(String.class));
-                                item.put("ingredients", ingredients);
-                                similarItems.add(item);
-                            }
-                        }
-                    }
-
-                    // Show the first similar item (or choose randomly)
-                    if (!similarItems.isEmpty()) {
-                        // Choose a random item from the similar items
-                        int randomIndex = (int) (Math.random() * similarItems.size());
-                        Map<String, String> recommendedItem = similarItems.get(randomIndex);
-
-                        // Display the recommendation
-                        showYouMayLikeDialog(
-                                recommendedItem.get("name"),
-                                recommendedItem.get("description"),
-                                recommendedItem.get("image"),
-                                recommendedItem.get("price"),
-                                recommendedItem.get("ingredients")
-                        );
-                    } else {
-                        Toast.makeText(FoodDescriptionActivity.this, "No similar items found.", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(FoodDescriptionActivity.this, "Selected food details not found.", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(FoodDescriptionActivity.this, "Menu data not found.", Toast.LENGTH_SHORT).show();
+            if (!dataSnapshot.exists()) {
+                Toast.makeText(this, "Menu data not found.", Toast.LENGTH_SHORT).show();
+                return;
             }
-        }).addOnFailureListener(e -> {
-            Toast.makeText(FoodDescriptionActivity.this, "Failed to fetch menu: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        });
+
+            Map<String, String> selectedFood = null;
+
+            // Find the selected food details
+            for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
+                String itemFoodName = itemSnapshot.child("foodName").getValue(String.class);
+                if (foodName.equals(itemFoodName)) {
+                    selectedFood = new HashMap<>();
+                    selectedFood.put("Description", itemSnapshot.child("foodDescription").getValue(String.class));
+                    selectedFood.put("Ingredients", itemSnapshot.child("foodIngredients").getValue(String.class));
+                    break;
+                }
+            }
+
+            if (selectedFood == null) {
+                Toast.makeText(this, "Selected food details not found.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            List<Map<String, String>> similarItems = new ArrayList<>();
+
+            // Find similar items in the menu
+            for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
+                String otherFoodName = itemSnapshot.child("foodName").getValue(String.class);
+                if (otherFoodName == null || foodName.equals(otherFoodName)) continue;
+
+                String description = itemSnapshot.child("foodDescription").getValue(String.class);
+                String ingredients = itemSnapshot.child("foodIngredients").getValue(String.class);
+
+                if (isSimilar(selectedFood.get("Description"), description) ||
+                        isSimilar(selectedFood.get("Ingredients"), ingredients)) {
+
+                    Map<String, String> item = new HashMap<>();
+                    item.put("name", otherFoodName);
+                    item.put("description", description);
+                    item.put("image", itemSnapshot.child("foodImage").getValue(String.class));
+                    item.put("price", itemSnapshot.child("foodPrice").getValue(String.class));
+                    item.put("ingredients", ingredients);
+                    similarItems.add(item);
+                }
+            }
+
+            // Show the recommended item
+            if (similarItems.isEmpty()) {
+                Toast.makeText(this, "No similar items found.", Toast.LENGTH_SHORT).show();
+            } else {
+                int randomIndex = (int) (Math.random() * similarItems.size());
+                Map<String, String> recommendedItem = similarItems.get(randomIndex);
+                showYouMayLikeDialog(
+                        recommendedItem.get("name"),
+                        recommendedItem.get("description"),
+                        recommendedItem.get("image"),
+                        recommendedItem.get("price"),
+                        recommendedItem.get("ingredients")
+                );
+            }
+        }).addOnFailureListener(e ->
+                Toast.makeText(FoodDescriptionActivity.this, "Failed to fetch menu: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+        );
     }
 
-    /**
-     * Helper method to check similarity between two text fields based on common words.
-     */
     private boolean isSimilar(String referenceText, String targetText) {
         if (referenceText == null || targetText == null) return false;
 
@@ -175,62 +169,110 @@ public class FoodDescriptionActivity extends AppCompatActivity {
         String[] referenceWords = referenceText.toLowerCase().split("\\s+");
         String[] targetWords = targetText.toLowerCase().split("\\s+");
 
-        int matchCount = 0;
+        // Calculate Jaccard similarity
+        int intersectionCount = 0;
         for (String word : referenceWords) {
             for (String targetWord : targetWords) {
                 if (word.equals(targetWord)) {
-                    matchCount++;
+                    intersectionCount++;
                 }
             }
         }
 
-        // Consider it similar if there's at least one common word
-        return matchCount > 0;
+        int unionCount = referenceWords.length + targetWords.length - intersectionCount;
+        return unionCount > 0 && ((double) intersectionCount / unionCount) >= 0.2; // Threshold: 20% match
     }
 
     private void showYouMayLikeDialog(String name, String description, String image, String price, String ingredients) {
-        if (name == null || description == null || image == null || price == null || ingredients == null) {
-            Toast.makeText(FoodDescriptionActivity.this, "Error: Incomplete item data.", Toast.LENGTH_SHORT).show();
-            return; // Exit early if any value is null
-        }
-        // Create a custom dialog
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_you_may_like, null);
         builder.setView(dialogView);
 
-        // Dialog Views
         ImageView imageView = dialogView.findViewById(R.id.imageViewYouMayLike);
         TextView textName = dialogView.findViewById(R.id.textViewYouMayLikeName);
         TextView textDescription = dialogView.findViewById(R.id.textViewYouMayLikeDescription);
         TextView textPrice = dialogView.findViewById(R.id.textViewYouMayLikePrice);
         Button buttonViewDetails = dialogView.findViewById(R.id.buttonViewDetails);
         Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonAddToCart = dialogView.findViewById(R.id.buttonAddToCart);
 
-        // Set Data
-        Glide.with(this).load(image).into(imageView);
-        textName.setText(name);
-        textDescription.setText(description);
-        textPrice.setText("Price: Rs." + price);
+        Glide.with(this)
+                .load(image)
+                .placeholder(R.drawable.pizza) // Add a placeholder if needed
+                .error(R.drawable.pizza)           // Add an error image if needed
+                .into(imageView);
 
-        // Button Actions
+        textName.setText(name != null ? name : "Unnamed Food");
+        textDescription.setText(description != null ? description : "No description available");
+        textPrice.setText(price != null ? "Price: Rs." + price : "Price not available");
+
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+
         buttonViewDetails.setOnClickListener(v -> {
-            // Navigate to FoodDescriptionActivity for the recommended item
+
             Intent intent = new Intent(FoodDescriptionActivity.this, FoodDescriptionActivity.class);
             intent.putExtra("food_name", name);
             intent.putExtra("food_description", description);
             intent.putExtra("food_image", image);
             intent.putExtra("food_price", price);
             intent.putExtra("food_ingredients", ingredients);
+            dialog.dismiss();
             startActivity(intent);
+            //finish();
         });
 
         buttonCancel.setOnClickListener(v -> {
             // Dismiss the dialog
-            dialogView.setVisibility(View.GONE);
+            dialog.dismiss();
+
+            // Navigate to homeScreen
+            Intent intent = new Intent(FoodDescriptionActivity.this, homeScreen.class);
+            intent.putExtra("food_name", name);
+            intent.putExtra("food_description", description);
+            intent.putExtra("food_image", image);
+            intent.putExtra("food_price", price);
+            intent.putExtra("food_ingredients", ingredients);
+            startActivity(intent);  // Start the homeScreen activity
+            finish();  // Optionally close this activity
         });
 
-        // Create and show the dialog
-        android.app.AlertDialog dialog = builder.create();
+        buttonAddToCart.setOnClickListener(v -> {
+            addItemToCart(name, description, image, price, ingredients);
+            Toast.makeText(FoodDescriptionActivity.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        });
+
         dialog.show();
+    }
+
+    private void addItemToCart(String name, String description, String image, String price, String ingredients) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("users")
+                .child(mAuth.getCurrentUser().getUid())
+                .child("CartItem");
+
+        CartItem cartItem = new CartItem(name, price, description, image, ingredients, 1);
+
+        databaseReference.push().setValue(cartItem)
+                .addOnSuccessListener(unused -> {
+                    // On success, show the success message
+                    Toast.makeText(this, "Item added to cart!", Toast.LENGTH_SHORT).show();
+
+                    // Start the homeScreen activity after adding the item
+                    Intent intent = new Intent(FoodDescriptionActivity.this, homeScreen.class);
+                    intent.putExtra("food_name", name);
+                    intent.putExtra("food_description", description);
+                    intent.putExtra("food_image", image);
+                    intent.putExtra("food_price", price);
+                    intent.putExtra("food_ingredients", ingredients);
+                    startActivity(intent);  // Start the homeScreen activity
+                    finish();  // Optionally close this activity
+                })
+                .addOnFailureListener(e -> {
+                    // Show failure message
+                    Toast.makeText(this, "Failed to add item to cart", Toast.LENGTH_SHORT).show();
+                });
     }
 }
