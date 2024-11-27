@@ -7,6 +7,7 @@ public class CartItem {
     private String foodName;
     private String foodPrice;
     private Integer foodQuantity;
+    private String priceType;
 
     public CartItem(){
 
@@ -67,5 +68,11 @@ public class CartItem {
 
     public void setFoodQuantity(Integer foodQuantity) {
         this.foodQuantity = foodQuantity;
+    }
+    public String getPriceType() {
+        return priceType;
+    }
+    public void setPriceType(String priceType) {
+        this.priceType = priceType;
     }
 }

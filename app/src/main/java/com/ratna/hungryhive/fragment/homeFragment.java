@@ -109,7 +109,7 @@ public class homeFragment extends Fragment {
 
                 // Shuffle the items and pick 4
                 Collections.shuffle(menuItems);
-                List<MenuItem> popularItems = menuItems.subList(0, Math.min(menuItems.size(), 4));
+                List<MenuItem> popularItems = menuItems.subList(0, Math.min(menuItems.size(), 5));
 
                 // Set the adapter for the Popular items
                 popularAdapter = new PopularAdapter(requireContext(), popularItems);

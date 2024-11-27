@@ -58,7 +58,8 @@ public class MyOrderActivity extends AppCompatActivity {
             cartItems = gson.fromJson(cartItemJson, cartItemType);
 
             for (CartItem item : cartItems) {
-                totalAmount += Double.parseDouble(item.getFoodPrice()) * item.getFoodQuantity();
+                String foodPrice = item.getFoodPrice().replaceAll("[^\\d.]", "");
+                totalAmount += Double.parseDouble(foodPrice) * item.getFoodQuantity();
             }
         }
 

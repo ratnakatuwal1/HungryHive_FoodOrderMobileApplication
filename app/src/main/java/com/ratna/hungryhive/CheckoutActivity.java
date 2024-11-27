@@ -248,8 +248,12 @@ public class CheckoutActivity extends AppCompatActivity {
         LinearLayout orderedItemsContainer = billView.findViewById(R.id.orderedItemsContainer);
 
         for (CartItem item : cartItems) {
+            String itemPrice = item.getFoodPrice().replaceAll("[^\\d.]", ""); // Remove non-numeric characters
+            double price = Double.parseDouble(itemPrice);  // Convert to double
+
+// Format the string
             String itemText = String.format("%s x%d - Rs. %.2f", item.getFoodName(), item.getFoodQuantity(),
-                    Double.parseDouble(item.getFoodPrice()) * item.getFoodQuantity());
+                    price * item.getFoodQuantity());
             TextView itemTextView = new TextView(this);
             itemTextView.setText(itemText);
             itemTextView.setTextColor(getResources().getColor(R.color.SecondaryTextColor));

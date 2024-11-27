@@ -10,7 +10,9 @@
         android:layout_width="@dimen/_285sdp"
         android:layout_height="@dimen/_80sdp"
         app:cardCornerRadius="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,46 +34,45 @@
 
             <TextView
                 android:id="@+id/textFoodName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_11sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/zenantique"
                 android:text="Food Name"
                 android:textColor="@color/ParagraphTextColor"
-                android:fontFamily="@font/zenantique"
                 android:textSize="@dimen/_18ssp"
-                app:layout_constraintBottom_toBottomOf="@+id/foodImage"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/foodImage"
-                app:layout_constraintTop_toTopOf="@+id/foodImage" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textFoodAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:text="@string/rs500"
-                android:textSize="@dimen/_14ssp"
-                android:textColor="@color/ParagraphTextColor"
                 android:fontFamily="@font/zenantique"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.588"
-                app:layout_constraintStart_toEndOf="@+id/textFoodName"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginBottom="@dimen/_14sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/rs500"
+                android:textColor="@color/ParagraphTextColor"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/foodImage" />
 
             <TextView
                 android:id="@+id/textAddToCart"
                 android:layout_width="@dimen/_65sdp"
                 android:layout_height="@dimen/_18sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:textColor="@color/white"
                 android:background="@drawable/add_to_cart_btn"
                 android:fontFamily="@font/zenantique"
                 android:text="@string/addToCartText"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_10ssp"
-                app:layout_constraintEnd_toEndOf="@+id/textFoodAmount"
-                app:layout_constraintHorizontal_bias="0.619"
-                app:layout_constraintStart_toStartOf="@+id/textFoodAmount"
-                app:layout_constraintTop_toBottomOf="@+id/textFoodAmount" />
+                app:layout_constraintBottom_toBottomOf="@+id/textFoodAmount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textFoodAmount"
+                app:layout_constraintTop_toTopOf="@+id/textFoodAmount" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
